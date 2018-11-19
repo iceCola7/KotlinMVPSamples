@@ -1,0 +1,63 @@
+ext {
+    android = [
+            compileSdkVersion: 28,
+            buildToolsVersion: "28.0.3",
+            minSdkVersion    : 16,
+            targetSdkVersion : 27,
+            versionCode      : 1,
+            versionName      : "1.0.0"
+    ]
+
+    dependVersion = [
+            androidSupportSdkVersion: "28.0.0",
+            espressoSdkVersion      : "3.0.2",
+            retrofitSdkVersion      : "2.4.0",
+            glideSdkVersion         : "4.8.0",
+            rxJava                  : "2.2.2",
+            rxAndroid               : "2.1.0",
+            rxKotlin                : "2.3.0",
+            anko                    : "0.10.7"
+    ]
+
+    supportDeps = [
+            "supportv4"        : "com.android.support:support-v4:${dependVersion.androidSupportSdkVersion}",
+            "appcompatv7"      : "com.android.support:appcompat-v7:${dependVersion.androidSupportSdkVersion}",
+            "cardview"         : "com.android.support:cardview-v7:${dependVersion.androidSupportSdkVersion}",
+            "design"           : "com.android.support:design:${dependVersion.androidSupportSdkVersion}",
+            "constraint-layout": "com.android.support.constraint:constraint-layout:1.1.2",
+            "annotations"      : "com.android.support:support-annotations:${dependVersion.androidSupportSdkVersion}"
+    ]
+
+    retrofit = [
+            "retrofit"                : "com.squareup.retrofit2:retrofit:${dependVersion.retrofitSdkVersion}",
+            "retrofitConverterGson"   : "com.squareup.retrofit2:converter-gson:${dependVersion.retrofitSdkVersion}",
+            "retrofitAdapterRxjava2"  : "com.squareup.retrofit2:adapter-rxjava2:${dependVersion.retrofitSdkVersion}",
+            "okhttp3LoggerInterceptor": 'com.squareup.okhttp3:logging-interceptor:3.11.0',
+            "retrofitConverterMoshi"  : 'com.squareup.retrofit2:converter-moshi:2.4.0',
+            "retrofitKotlinMoshi"     : "com.squareup.moshi:moshi-kotlin:1.7.0"
+    ]
+
+    rxJava = [
+            "rxJava"   : "io.reactivex.rxjava2:rxjava:${dependVersion.rxJava}",
+            "rxAndroid": "io.reactivex.rxjava2:rxandroid:${dependVersion.rxAndroid}",
+            "rxKotlin" : "io.reactivex.rxjava2:rxkotlin:${dependVersion.rxKotlin}",
+            "anko"     : "org.jetbrains.anko:anko:${dependVersion.anko}"
+    ]
+
+    testDeps = [
+            "junit"                    : 'junit:junit:4.12',
+            "runner"                   : 'com.android.support.test:runner:1.0.2',
+            "espresso-core"            : "com.android.support.test.espresso:espresso-core:${dependVersion.espressoSdkVersion}",
+            "espresso-contrib"         : "com.android.support.test.espresso:espresso-contrib:${dependVersion.espressoSdkVersion}",
+            "espresso-intents"         : "com.android.support.test.espresso:espresso-intents:${dependVersion.espressoSdkVersion}",
+            "leakcanary-debug"         : 'com.squareup.leakcanary:leakcanary-android:1.6.1',
+            "leakcanary-release"       : 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1',
+            "leakcanary-debug-fragment": 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.1',
+            "debug-db"                 : 'com.amitshekhar.android:debug-db:1.0.4'
+    ]
+
+    supportLibs = supportDeps.values()
+    networkLibs = retrofit.values()
+    rxJavaLibs = rxJava.values()
+
+}
