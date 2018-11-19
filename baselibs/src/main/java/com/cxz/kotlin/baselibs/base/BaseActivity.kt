@@ -2,6 +2,8 @@ package com.cxz.kotlin.baselibs.base
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.MotionEvent
+import com.cxz.kotlin.baselibs.utils.KeyBoardUtil
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -46,6 +48,17 @@ abstract class BaseActivity : AppCompatActivity() {
         initView()
         initData()
         start()
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        if (ev?.action == MotionEvent.ACTION_UP) {
+            val v = currentFocus
+            // 如果不是落在EditText区域，则需要关闭输入法
+            if (KeyBoardUtil.isHideKeyboard(v, ev)) {
+                KeyBoardUtil.hideKeyBoard(this, v)
+            }
+        }
+        return super.dispatchTouchEvent(ev)
     }
 
     override fun onDestroy() {
