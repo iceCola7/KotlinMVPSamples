@@ -8,7 +8,7 @@ import android.arch.lifecycle.OnLifecycleEvent
 /**
  * @author chenxz
  * @date 2018/11/18
- * @desc
+ * @desc BaseModel
  */
 abstract class BaseModel : IModel, LifecycleObserver {
 

@@ -3,7 +3,7 @@ package com.cxz.kotlin.baselibs.mvp
 /**
  * @author chenxz
  * @date 2018/11/18
- * @desc
+ * @desc IPresenter
  */
 interface IPresenter<in V : IView> {
 
