@@ -35,7 +35,7 @@ abstract class BaseActivity : AppCompatActivity() {
     /**
      * 是否使用 EventBus
      */
-    open fun useEventBus(): Boolean = true
+    open fun useEventBus(): Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -43,7 +43,7 @@ abstract class BaseFragment : Fragment() {
     /**
      * 是否使用 EventBus
      */
-    open fun useEventBus(): Boolean = true
+    open fun useEventBus(): Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(attachLayoutRes(), null)

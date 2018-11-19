@@ -54,6 +54,7 @@ abstract class BasePresenter<M : IModel, V : IView> : IPresenter<V>, LifecycleOb
         }
         // 保证activity结束时取消所有正在执行的订阅
         unDispose()
+        mModel?.onDetach()
         this.mModel = null
         this.mView = null
         this.mCompositeDisposable = null
