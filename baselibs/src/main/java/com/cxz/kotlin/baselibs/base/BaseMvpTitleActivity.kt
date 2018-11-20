@@ -28,6 +28,7 @@ abstract class BaseMvpTitleActivity<in V : IView, P : IPresenter<V>> : BaseMvpAc
     override fun attachLayoutRes(): Int = R.layout.activity_base_title
 
     override fun initView() {
+        super.initView()
         base_container.addView(layoutInflater.inflate(attachChildLayoutRes(), null))
         base_toolbar.title = ""
         setSupportActionBar(base_toolbar)

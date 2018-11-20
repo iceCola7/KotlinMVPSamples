@@ -73,7 +73,7 @@ abstract class BasePresenter<M : IModel, V : IView> : IPresenter<V>, LifecycleOb
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun onDestroy(owner: LifecycleOwner) {
-        detachView()
+        // detachView()
         owner.lifecycle.removeObserver(this)
     }
 
@@ -82,7 +82,7 @@ abstract class BasePresenter<M : IModel, V : IView> : IPresenter<V>, LifecycleOb
     }
 
     private class MvpViewNotAttachedException internal constructor() :
-        RuntimeException("Please call IPresenter.attachView(IBaseView) before" + " requesting data to the IPresenter")
+            RuntimeException("Please call IPresenter.attachView(IBaseView) before" + " requesting data to the IPresenter")
 
 
 }

@@ -1,6 +1,5 @@
 package com.cxz.kotlin.baselibs.base
 
-import android.os.Bundle
 import com.cxz.kotlin.baselibs.mvp.IPresenter
 import com.cxz.kotlin.baselibs.mvp.IView
 
@@ -18,8 +17,7 @@ abstract class BaseMvpActivity<in V : IView, P : IPresenter<V>> : BaseActivity()
 
     protected abstract fun createPresenter(): P
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun initView() {
         mPresenter = createPresenter()
         if (mPresenter != null) {
             mPresenter?.attachView(this as V)
