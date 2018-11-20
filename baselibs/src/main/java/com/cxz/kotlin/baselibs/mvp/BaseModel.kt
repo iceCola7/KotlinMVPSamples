@@ -12,6 +12,10 @@ import android.arch.lifecycle.OnLifecycleEvent
  */
 abstract class BaseModel : IModel, LifecycleObserver {
 
+    override fun onDetach() {
+
+    }
+
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun onDestroy(owner: LifecycleOwner) {
         owner.lifecycle.removeObserver(this)

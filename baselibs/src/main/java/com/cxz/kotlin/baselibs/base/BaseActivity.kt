@@ -1,8 +1,11 @@
 package com.cxz.kotlin.baselibs.base
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 import android.view.MotionEvent
+import android.view.WindowManager
 import com.cxz.kotlin.baselibs.utils.KeyBoardUtil
 import org.greenrobot.eventbus.EventBus
 
@@ -12,7 +15,6 @@ import org.greenrobot.eventbus.EventBus
  * @desc BaseActivity
  */
 abstract class BaseActivity : AppCompatActivity() {
-
 
     /**
      * 布局文件id
@@ -40,7 +42,9 @@ abstract class BaseActivity : AppCompatActivity() {
     open fun useEventBus(): Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         super.onCreate(savedInstanceState)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT // 强制竖屏
         setContentView(attachLayoutRes())
         if (useEventBus()) {
             EventBus.getDefault().register(this)
@@ -59,6 +63,15 @@ abstract class BaseActivity : AppCompatActivity() {
             }
         }
         return super.dispatchTouchEvent(ev)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {
