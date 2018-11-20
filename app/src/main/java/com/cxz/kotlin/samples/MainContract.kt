@@ -12,15 +12,15 @@ import com.cxz.kotlin.baselibs.mvp.IView
 interface MainContract {
 
     interface View : IView {
-
+        fun showData(data: String)
     }
 
     interface Presenter : IPresenter<View> {
-
+        fun getData()
     }
 
     interface Model : IModel {
-
+        fun getData(): String
     }
 
 }

@@ -9,4 +9,8 @@ import com.cxz.kotlin.baselibs.mvp.BaseModel
  */
 class MainModel : BaseModel(), MainContract.Model {
 
+    override fun getData(): String {
+        return """{"data":{"id":"1","name":"Tom"}}"""
+    }
+
 }

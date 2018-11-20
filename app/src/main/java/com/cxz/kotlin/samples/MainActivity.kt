@@ -1,6 +1,8 @@
 package com.cxz.kotlin.samples
 
 import com.cxz.kotlin.baselibs.base.BaseMvpTitleActivity
+import com.cxz.kotlin.baselibs.ext.loge
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presenter>(), MainContract.View {
 
@@ -14,6 +16,11 @@ class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presen
         super.initView()
         setBaseTitleColor(android.R.color.white)
         setBaseTitle("Main")
+
+        button.setOnClickListener {
+            mPresenter?.getData()
+        }
+
     }
 
     override fun initData() {
@@ -22,5 +29,9 @@ class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presen
     override fun start() {
     }
 
+    override fun showData(data: String) {
+        loge("--------------showData------>>$data")
+        tv_result.text = data
+    }
 
 }
