@@ -59,11 +59,11 @@ abstract class BasePresenter<M : IModel, V : IView> : IPresenter<V>, LifecycleOb
         this.mCompositeDisposable = null
     }
 
-    open fun addDisposable(disposable: Disposable) {
+    open fun addDisposable(disposable: Disposable?) {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = CompositeDisposable()
         }
-        mCompositeDisposable?.add(disposable)
+        disposable?.let { mCompositeDisposable?.add(it) }
     }
 
     private fun unDispose() {

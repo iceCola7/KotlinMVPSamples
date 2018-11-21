@@ -24,7 +24,7 @@ abstract class RetrofitFactory<T> {
 
     private var mBaseUrl = ""
     private var retrofit: Retrofit? = null
-    var service: T? = null
+    var service: T
 
     abstract fun baseUrl(): String
     abstract fun getService(): Class<T>
