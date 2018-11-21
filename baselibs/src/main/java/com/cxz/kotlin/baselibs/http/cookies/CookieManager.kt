@@ -1,4 +1,4 @@
-package com.cxz.wanandroid.http.cookies
+package com.cxz.kotlin.baselibs.http.cookies
 
 import okhttp3.Cookie
 import okhttp3.CookieJar
