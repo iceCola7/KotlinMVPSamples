@@ -31,9 +31,14 @@ abstract class BaseFragment : Fragment() {
     abstract fun attachLayoutRes(): Int
 
     /**
+     * 初始化数据
+     */
+    open fun initData() {}
+
+    /**
      * 初始化 View
      */
-    abstract fun initView()
+    abstract fun initView(view: View)
 
     /**
      * 懒加载
@@ -63,7 +68,8 @@ abstract class BaseFragment : Fragment() {
             EventBus.getDefault().register(this)
         }
         isViewPrepare = true
-        initView()
+        initView(view)
+        initData()
         lazyLoadDataIfPrepared()
     }
 

@@ -1,5 +1,6 @@
 package com.cxz.kotlin.baselibs.base
 
+import android.view.View
 import com.cxz.kotlin.baselibs.mvp.IPresenter
 import com.cxz.kotlin.baselibs.mvp.IView
 
@@ -17,7 +18,7 @@ abstract class BaseMvpFragment<in V : IView, P : IPresenter<V>> : BaseFragment()
 
     protected abstract fun createPresenter(): P
 
-    override fun initView() {
+    override fun initView(view: View) {
         mPresenter = createPresenter()
         if (mPresenter != null) {
             mPresenter?.attachView(this as V)

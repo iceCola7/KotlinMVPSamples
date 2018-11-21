@@ -2,6 +2,7 @@ package com.cxz.kotlin.baselibs.base
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.support.annotation.LayoutRes
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.MotionEvent
@@ -19,12 +20,13 @@ abstract class BaseActivity : AppCompatActivity() {
     /**
      * 布局文件id
      */
+    @LayoutRes
     protected abstract fun attachLayoutRes(): Int
 
     /**
      * 初始化数据
      */
-    abstract fun initData()
+    open fun initData() {}
 
     /**
      * 初始化 View

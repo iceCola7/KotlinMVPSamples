@@ -26,7 +26,7 @@ abstract class BasePresenter<M : IModel, V : IView> : IPresenter<V>, LifecycleOb
     /**
      * 创建 Model
      */
-    abstract fun createModel(): M
+    open fun createModel(): M? = null
 
     /**
      * 是否使用 EventBus
@@ -34,7 +34,6 @@ abstract class BasePresenter<M : IModel, V : IView> : IPresenter<V>, LifecycleOb
     open fun useEventBus(): Boolean = false
 
     override fun attachView(mView: V) {
-        mCompositeDisposable = CompositeDisposable()
         this.mView = mView
         mModel = createModel()
         if (mView is LifecycleOwner) {
@@ -61,6 +60,9 @@ abstract class BasePresenter<M : IModel, V : IView> : IPresenter<V>, LifecycleOb
     }
 
     open fun addDisposable(disposable: Disposable) {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = CompositeDisposable()
+        }
         mCompositeDisposable?.add(disposable)
     }
 
@@ -82,7 +84,7 @@ abstract class BasePresenter<M : IModel, V : IView> : IPresenter<V>, LifecycleOb
     }
 
     private class MvpViewNotAttachedException internal constructor() :
-            RuntimeException("Please call IPresenter.attachView(IBaseView) before" + " requesting data to the IPresenter")
+        RuntimeException("Please call IPresenter.attachView(IBaseView) before" + " requesting data to the IPresenter")
 
 
 }
