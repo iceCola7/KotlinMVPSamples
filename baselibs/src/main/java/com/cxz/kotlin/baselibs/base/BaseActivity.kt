@@ -2,12 +2,14 @@ package com.cxz.kotlin.baselibs.base
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.support.annotation.ColorInt
 import android.support.annotation.LayoutRes
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.WindowManager
 import com.cxz.kotlin.baselibs.utils.KeyBoardUtil
+import com.cxz.kotlin.baselibs.utils.StatusBarUtil
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -42,6 +44,22 @@ abstract class BaseActivity : AppCompatActivity() {
      * 是否使用 EventBus
      */
     open fun useEventBus(): Boolean = false
+
+    /**
+     * 设置状态栏的背景颜色
+     */
+    fun setStatusBarColor(@ColorInt color: Int) {
+        StatusBarUtil.setColor(this, color, 0)
+    }
+
+    /**
+     * 设置状态栏图标的颜色
+     *
+     * @param dark true: 黑色  false: 白色
+     */
+    fun setStatusBarIcon(dark: Boolean) {
+        StatusBarUtil.setLightStatusBar(this, dark)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
