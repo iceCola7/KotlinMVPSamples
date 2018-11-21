@@ -14,6 +14,8 @@ class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presen
     override fun hasBackIcon(): Boolean = true
 
     override fun initView() {
+        setStatusBarColor(resources.getColor(R.color.colorPrimary))
+        setStatusBarIcon(false)
         super.initView()
         setBaseTitleColor(android.R.color.white)
         setBaseTitle("Main")
