@@ -2,6 +2,7 @@ package com.cxz.kotlin.samples
 
 import com.cxz.kotlin.baselibs.base.BaseMvpTitleActivity
 import com.cxz.kotlin.baselibs.ext.loge
+import com.cxz.kotlin.samples.bean.Banner
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presenter>(), MainContract.View {
@@ -19,6 +20,7 @@ class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presen
 
         button.setOnClickListener {
             mPresenter?.getData()
+            mPresenter?.getBanner()
         }
 
     }
@@ -32,6 +34,10 @@ class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presen
     override fun showData(data: String) {
         loge("--------------showData------>>$data")
         tv_result.text = data
+    }
+
+    override fun showBanners(banners: MutableList<Banner>) {
+        loge("-------------------->>$banners")
     }
 
 }
