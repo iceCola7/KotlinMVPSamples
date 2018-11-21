@@ -1,4 +1,4 @@
-package com.cxz.wanandroid.http.exception
+package com.cxz.kotlin.baselibs.http.exception
 
 import com.google.gson.JsonParseException
 import com.orhanobut.logger.Logger
