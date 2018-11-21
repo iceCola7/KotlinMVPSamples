@@ -1,5 +1,6 @@
 package com.cxz.kotlin.baselibs.base
 
+import com.cxz.kotlin.baselibs.ext.showToast
 import com.cxz.kotlin.baselibs.mvp.IPresenter
 import com.cxz.kotlin.baselibs.mvp.IView
 
@@ -39,6 +40,15 @@ abstract class BaseMvpActivity<in V : IView, P : IPresenter<V>> : BaseActivity()
     }
 
     override fun showError(errorMsg: String) {
+        showToast(errorMsg)
+    }
+
+    override fun showDefaultMsg(msg: String) {
+        showToast(msg)
+    }
+
+    override fun showMsg(msg: String) {
+        showToast(msg)
     }
 
 }

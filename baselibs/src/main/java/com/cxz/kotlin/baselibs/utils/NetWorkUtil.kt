@@ -8,6 +8,7 @@ import android.net.NetworkInfo
 import android.net.wifi.WifiManager
 import android.provider.Settings
 import android.telephony.TelephonyManager
+import com.cxz.kotlin.baselibs.app.BaseApp
 import java.net.NetworkInterface
 import java.net.SocketException
 
@@ -58,6 +59,18 @@ object NetWorkUtil {
     private fun getActiveNetworkInfo(context: Context): NetworkInfo? {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return cm.activeNetworkInfo
+    }
+
+    /**
+     * 判断网络是否连接
+     *
+     * 需添加权限
+     * `<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>`
+     *
+     * @return `true`: 是 `false`: 否
+     */
+    fun isConnected(): Boolean {
+        return isConnected(BaseApp.instance)
     }
 
     /**
