@@ -16,7 +16,7 @@ abstract class BaseModel : IModel, LifecycleObserver {
 
     private var mCompositeDisposable: CompositeDisposable? = null
 
-    open fun addDisposable(disposable: Disposable?) {
+    override fun addDisposable(disposable: Disposable?) {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = CompositeDisposable()
         }

@@ -11,12 +11,12 @@ import com.cxz.kotlin.baselibs.R
 import com.cxz.kotlin.baselibs.bean.BaseBean
 import com.cxz.kotlin.baselibs.http.exception.ErrorStatus
 import com.cxz.kotlin.baselibs.http.exception.ExceptionHandle
-import com.cxz.kotlin.baselibs.mvp.BaseModel
+import com.cxz.kotlin.baselibs.http.function.RetryWithDelay
+import com.cxz.kotlin.baselibs.mvp.IModel
 import com.cxz.kotlin.baselibs.mvp.IView
 import com.cxz.kotlin.baselibs.rx.SchedulerUtils
 import com.cxz.kotlin.baselibs.utils.NetWorkUtil
 import com.cxz.kotlin.baselibs.widget.CustomToast
-import com.cxz.wanandroid.http.function.RetryWithDelay
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -55,8 +55,8 @@ fun Fragment.showSnackMsg(msg: String) {
 }
 
 fun <T : BaseBean> Observable<T>.ss(
-    model: BaseModel? = null,
-    view: IView? = null,
+    model: IModel?,
+    view: IView?,
     onSuccess: (T) -> Unit
 ) {
     this.compose(SchedulerUtils.ioToMain())
@@ -93,7 +93,7 @@ fun <T : BaseBean> Observable<T>.ss(
 }
 
 fun <T : BaseBean> Observable<T>.sss(
-    view: IView? = null,
+    view: IView?,
     onSuccess: (T) -> Unit
 ): Disposable {
     view?.showLoading()
@@ -107,6 +107,7 @@ fun <T : BaseBean> Observable<T>.sss(
                 }
                 else -> view?.showDefaultMsg(it.errorMsg)
             }
+            view?.hideLoading()
         }, {
             view?.hideLoading()
             ExceptionHandle.handleException(it)

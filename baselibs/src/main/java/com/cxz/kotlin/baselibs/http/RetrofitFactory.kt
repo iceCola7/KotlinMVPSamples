@@ -3,9 +3,9 @@ package com.cxz.kotlin.baselibs.http
 import com.cxz.kotlin.baselibs.BuildConfig
 import com.cxz.kotlin.baselibs.app.BaseApp
 import com.cxz.kotlin.baselibs.http.constant.HttpConstant
-import com.cxz.wanandroid.http.interceptor.CacheInterceptor
-import com.cxz.wanandroid.http.interceptor.HeaderInterceptor
-import com.cxz.wanandroid.http.interceptor.SaveCookieInterceptor
+import com.cxz.kotlin.baselibs.http.interceptor.CacheInterceptor
+import com.cxz.kotlin.baselibs.http.interceptor.HeaderInterceptor
+import com.cxz.kotlin.baselibs.http.interceptor.SaveCookieInterceptor
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

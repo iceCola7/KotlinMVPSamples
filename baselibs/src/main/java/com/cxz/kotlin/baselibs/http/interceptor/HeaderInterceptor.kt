@@ -1,4 +1,4 @@
-package com.cxz.wanandroid.http.interceptor
+package com.cxz.kotlin.baselibs.http.interceptor
 
 import com.cxz.kotlin.baselibs.http.constant.HttpConstant
 import com.cxz.kotlin.baselibs.utils.Preference

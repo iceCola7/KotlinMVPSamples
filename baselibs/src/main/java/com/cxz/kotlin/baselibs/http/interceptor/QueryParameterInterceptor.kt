@@ -1,4 +1,4 @@
-package com.cxz.wanandroid.http.interceptor
+package com.cxz.kotlin.baselibs.http.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Request

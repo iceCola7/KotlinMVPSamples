@@ -1,4 +1,4 @@
-package com.cxz.wanandroid.http.interceptor
+package com.cxz.kotlin.baselibs.http.interceptor
 
 import com.cxz.kotlin.baselibs.http.constant.HttpConstant
 import okhttp3.Interceptor
@@ -19,7 +19,7 @@ class SaveCookieInterceptor : Interceptor {
 
         // set-cookie maybe has multi, login to save cookie
         if ((requestUrl.contains(HttpConstant.SAVE_USER_LOGIN_KEY) || requestUrl.contains(HttpConstant.SAVE_USER_REGISTER_KEY))
-            && !response.headers(HttpConstant.SET_COOKIE_KEY).isEmpty()) {
+                && !response.headers(HttpConstant.SET_COOKIE_KEY).isEmpty()) {
 
             val cookies = response.headers(HttpConstant.SET_COOKIE_KEY)
             val cookie = HttpConstant.encodeCookie(cookies)

@@ -9,7 +9,7 @@ import kotlin.properties.Delegates
  * @date 2018/11/18
  * @desc BaseApp
  */
-open class BaseApp : Application() {
+abstract class BaseApp : Application() {
 
     companion object {
         var instance: Context by Delegates.notNull()
