@@ -50,4 +50,6 @@ dependencies {
     api 'org.greenrobot:eventbus:3.1.1'
     // logger
     api 'com.orhanobut:logger:2.2.0'
+    // multidex
+    api 'com.android.support:multidex:1.0.3'
 }

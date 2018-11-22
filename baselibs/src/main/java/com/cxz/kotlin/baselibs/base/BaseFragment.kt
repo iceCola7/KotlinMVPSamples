@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.cxz.kotlin.baselibs.app.BaseApp
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -86,5 +87,6 @@ abstract class BaseFragment : Fragment() {
         if (useEventBus()) {
             EventBus.getDefault().unregister(this)
         }
+        activity?.let { BaseApp.getRefWatcher(it)?.watch(activity) }
     }
 }
