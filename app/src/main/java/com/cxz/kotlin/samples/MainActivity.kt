@@ -1,7 +1,6 @@
 package com.cxz.kotlin.samples
 
 import com.cxz.kotlin.baselibs.base.BaseMvpTitleActivity
-import com.cxz.kotlin.baselibs.ext.loge
 import com.cxz.kotlin.samples.bean.Banner
 import com.cxz.kotlin.samples.utils.DialogUtil
 import kotlinx.android.synthetic.main.activity_main.*
@@ -57,7 +56,6 @@ class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presen
     }
 
     override fun showBanners(banners: MutableList<Banner>) {
-        loge("-------->>$banners")
         tv_result.text = banners.toString()
     }
 

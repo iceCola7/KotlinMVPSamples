@@ -1,7 +1,6 @@
 package com.cxz.kotlin.samples
 
 import com.cxz.kotlin.baselibs.mvp.BaseModel
-import com.cxz.kotlin.baselibs.rx.SchedulerUtils
 import com.cxz.kotlin.samples.bean.Banner
 import com.cxz.kotlin.samples.bean.HttpResult
 import com.cxz.kotlin.samples.http.MainRetrofit

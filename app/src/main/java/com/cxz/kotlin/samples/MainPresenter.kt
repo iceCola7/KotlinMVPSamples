@@ -19,7 +19,8 @@ class MainPresenter : BasePresenter<MainContract.Model, MainContract.View>(), Ma
     override fun getBanner() {
 
         mView?.showLoading()
-        addDisposable(mModel?.getBanners()
+        addDisposable(
+            mModel?.getBanners()
                 ?.compose(SchedulerUtils.ioToMain())
                 ?.subscribe({
                     if (it.errorCode == ErrorStatus.SUCCESS) {
@@ -46,9 +47,9 @@ class MainPresenter : BasePresenter<MainContract.Model, MainContract.View>(), Ma
 
     override fun getBanner3() {
         addDisposable(
-                mModel?.getBanners()?.sss(mView) {
-                    mView?.showBanners(it.data)
-                }
+            mModel?.getBanners()?.sss(mView) {
+                mView?.showBanners(it.data)
+            }
         )
     }
 
