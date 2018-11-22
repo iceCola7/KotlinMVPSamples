@@ -7,11 +7,18 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presenter>(), MainContract.View {
 
+
     override fun attachChildLayoutRes(): Int = R.layout.activity_main
 
     override fun createPresenter(): MainContract.Presenter = MainPresenter()
 
     override fun hasBackIcon(): Boolean = true
+
+    override fun showLoading() {
+    }
+
+    override fun hideLoading() {
+    }
 
     override fun initView() {
         setStatusBarColor(resources.getColor(R.color.colorPrimary))
@@ -21,8 +28,18 @@ class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presen
         setBaseTitle("Main")
 
         button.setOnClickListener {
-            mPresenter?.getData()
+            tv_result.text = ""
             mPresenter?.getBanner()
+        }
+
+        button2.setOnClickListener {
+            tv_result.text = ""
+            mPresenter?.getBanner2()
+        }
+
+        button3.setOnClickListener {
+            tv_result.text = ""
+            mPresenter?.getBanner3()
         }
 
     }
@@ -33,13 +50,9 @@ class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presen
     override fun start() {
     }
 
-    override fun showData(data: String) {
-        loge("--------------showData------>>$data")
-        tv_result.text = data
-    }
-
     override fun showBanners(banners: MutableList<Banner>) {
-        loge("-------------------->>$banners")
+        loge("-------->>$banners")
+        tv_result.text = banners.toString()
     }
 
 }

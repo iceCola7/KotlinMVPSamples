@@ -15,17 +15,16 @@ import io.reactivex.Observable
 interface MainContract {
 
     interface View : IView {
-        fun showData(data: String)
         fun showBanners(banners: MutableList<Banner>)
     }
 
     interface Presenter : IPresenter<View> {
-        fun getData()
         fun getBanner()
+        fun getBanner2()
+        fun getBanner3()
     }
 
     interface Model : IModel {
-        fun getData(): String
         fun getBanners(): Observable<HttpResult<MutableList<Banner>>>
     }
 

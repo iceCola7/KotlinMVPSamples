@@ -14,13 +14,8 @@ import io.reactivex.Observable
  */
 class MainModel : BaseModel(), MainContract.Model {
 
-    override fun getData(): String {
-        return """{"data":{"id":"1","name":"Tom"}}"""
-    }
-
     override fun getBanners(): Observable<HttpResult<MutableList<Banner>>> {
         return MainRetrofit.service.getHomeBanner()
-            .compose(SchedulerUtils.ioToMain())
     }
 
 }
