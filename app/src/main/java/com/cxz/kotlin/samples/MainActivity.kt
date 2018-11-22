@@ -3,10 +3,14 @@ package com.cxz.kotlin.samples
 import com.cxz.kotlin.baselibs.base.BaseMvpTitleActivity
 import com.cxz.kotlin.baselibs.ext.loge
 import com.cxz.kotlin.samples.bean.Banner
+import com.cxz.kotlin.samples.utils.DialogUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presenter>(), MainContract.View {
 
+    private val mDialog by lazy {
+        DialogUtil.getWaitDialog(this, "正在加载")
+    }
 
     override fun attachChildLayoutRes(): Int = R.layout.activity_main
 
@@ -15,9 +19,11 @@ class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presen
     override fun hasBackIcon(): Boolean = true
 
     override fun showLoading() {
+        mDialog.show()
     }
 
     override fun hideLoading() {
+        mDialog.dismiss()
     }
 
     override fun initView() {
