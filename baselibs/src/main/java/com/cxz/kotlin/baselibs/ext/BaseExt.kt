@@ -71,6 +71,7 @@ fun <T : BaseBean> Observable<T>.ss(
                 model?.addDisposable(d)
                 if (!NetWorkUtil.isConnected()) {
                     view?.showDefaultMsg("当前网络不可用，请检查网络设置")
+                    d.dispose()
                     onComplete()
                 }
             }
