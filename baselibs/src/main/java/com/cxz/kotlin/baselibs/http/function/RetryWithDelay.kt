@@ -17,7 +17,7 @@ import java.util.concurrent.TimeoutException
 class RetryWithDelay : Function<Observable<out Throwable>, Observable<*>> {
 
     private var maxRetryCount = 3 // 可重试次数
-    private var retryDelayMillis: Long = 5000 // 重试等待时间
+    private var retryDelayMillis: Long = 3000 // 重试等待时间
 
     constructor() {}
 
@@ -33,19 +33,19 @@ class RetryWithDelay : Function<Observable<out Throwable>, Observable<*>> {
     @Throws(Exception::class)
     override fun apply(observable: Observable<out Throwable>): Observable<*> {
         return observable
-                .zipWith(Observable.range(1, maxRetryCount + 1),
-                        BiFunction<Throwable, Int, Wrapper> { t1, t2 -> Wrapper(t2, t1) })
-                .flatMap { wrapper ->
-                    val t = wrapper.throwable
-                    if ((t is ConnectException
-                                    || t is SocketTimeoutException
-                                    || t is TimeoutException
-                                    || t is HttpException)
-                            && wrapper.index < maxRetryCount + 1
-                    ) {
-                        Observable.timer(retryDelayMillis * wrapper.index, TimeUnit.SECONDS)
-                    } else Observable.error<Any>(wrapper.throwable)
-                }
+            .zipWith(Observable.range(1, maxRetryCount + 1),
+                BiFunction<Throwable, Int, Wrapper> { t1, t2 -> Wrapper(t2, t1) })
+            .flatMap { wrapper ->
+                val t = wrapper.throwable
+                if ((t is ConnectException
+                            || t is SocketTimeoutException
+                            || t is TimeoutException
+                            || t is HttpException)
+                    && wrapper.index < maxRetryCount + 1
+                ) {
+                    Observable.timer(retryDelayMillis * wrapper.index, TimeUnit.MILLISECONDS)
+                } else Observable.error<Any>(wrapper.throwable)
+            }
     }
 
     private inner class Wrapper(val index: Int, val throwable: Throwable)

@@ -41,7 +41,7 @@ abstract class BaseObserver<T : BaseBean>(view: IView? = null) : ResourceObserve
 
     override fun onError(t: Throwable) {
         mView?.hideLoading()
-        ExceptionHandle.handleException(t)
+        mView?.showError(ExceptionHandle.handleException(t))
     }
 
 }

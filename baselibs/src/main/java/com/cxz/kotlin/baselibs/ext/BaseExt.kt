@@ -87,7 +87,7 @@ fun <T : BaseBean> Observable<T>.ss(
 
             override fun onError(t: Throwable) {
                 view?.hideLoading()
-                ExceptionHandle.handleException(t)
+                view?.showError(ExceptionHandle.handleException(t))
             }
         })
 }
@@ -110,6 +110,6 @@ fun <T : BaseBean> Observable<T>.sss(
             view?.hideLoading()
         }, {
             view?.hideLoading()
-            ExceptionHandle.handleException(it)
+            view?.showError(ExceptionHandle.handleException(it))
         })
 }

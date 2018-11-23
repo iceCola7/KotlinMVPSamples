@@ -41,7 +41,7 @@ abstract class BaseSubscriber<T : BaseBean>(view: IView? = null) : ResourceSubsc
 
     override fun onError(t: Throwable) {
         mView?.hideLoading()
-        ExceptionHandle.handleException(t)
+        mView?.showError(ExceptionHandle.handleException(t))
     }
 
 }
