@@ -57,6 +57,7 @@ fun Fragment.showSnackMsg(msg: String) {
 fun <T : BaseBean> Observable<T>.ss(
     model: IModel?,
     view: IView?,
+    isShowLoading: Boolean = true,
     onSuccess: (T) -> Unit
 ) {
     this.compose(SchedulerUtils.ioToMain())
@@ -67,7 +68,9 @@ fun <T : BaseBean> Observable<T>.ss(
             }
 
             override fun onSubscribe(d: Disposable) {
-                view?.showLoading()
+                if (isShowLoading) {
+                    view?.showLoading()
+                }
                 model?.addDisposable(d)
                 if (!NetWorkUtil.isConnected()) {
                     view?.showDefaultMsg("当前网络不可用，请检查网络设置")
@@ -95,9 +98,12 @@ fun <T : BaseBean> Observable<T>.ss(
 
 fun <T : BaseBean> Observable<T>.sss(
     view: IView?,
+    isShowLoading: Boolean = true,
     onSuccess: (T) -> Unit
 ): Disposable {
-    view?.showLoading()
+    if (isShowLoading) {
+        view?.showLoading()
+    }
     return this.compose(SchedulerUtils.ioToMain())
         .retryWhen(RetryWithDelay())
         .subscribe({
