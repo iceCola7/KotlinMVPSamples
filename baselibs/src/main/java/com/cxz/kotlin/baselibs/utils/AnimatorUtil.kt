@@ -1,4 +1,4 @@
-package com.cxz.wanandroid.utils
+package com.cxz.kotlin.baselibs.utils
 
 import android.support.v4.view.ViewCompat
 import android.support.v4.view.ViewPropertyAnimatorListener
@@ -27,13 +27,13 @@ object AnimatorUtil {
     fun scaleShow(view: View, listener: ViewPropertyAnimatorListener) {
         view.visibility = View.VISIBLE
         ViewCompat.animate(view)
-                .scaleX(1.0f)
-                .scaleY(1.0f)
-                .alpha(1.0f)
-                .setDuration(800)
-                .setListener(listener)
-                .setInterpolator(FAST_OUT_SLOW_IN_INTERPOLATOR)
-                .start()
+            .scaleX(1.0f)
+            .scaleY(1.0f)
+            .alpha(1.0f)
+            .setDuration(800)
+            .setListener(listener)
+            .setInterpolator(FAST_OUT_SLOW_IN_INTERPOLATOR)
+            .start()
     }
 
     /**
@@ -43,13 +43,13 @@ object AnimatorUtil {
      */
     fun scaleHide(view: View, listener: ViewPropertyAnimatorListener) {
         ViewCompat.animate(view)
-                .scaleX(0.0f)
-                .scaleY(0.0f)
-                .alpha(0.0f)
-                .setDuration(800)
-                .setInterpolator(FAST_OUT_SLOW_IN_INTERPOLATOR)
-                .setListener(listener)
-                .start()
+            .scaleX(0.0f)
+            .scaleY(0.0f)
+            .alpha(0.0f)
+            .setDuration(800)
+            .setInterpolator(FAST_OUT_SLOW_IN_INTERPOLATOR)
+            .setListener(listener)
+            .start()
     }
 
     /**
@@ -61,11 +61,11 @@ object AnimatorUtil {
     fun translateShow(view: View, listener: ViewPropertyAnimatorListener) {
         view.visibility = View.VISIBLE
         ViewCompat.animate(view)
-                .translationY(0f)
-                .setDuration(400)
-                .setListener(listener)
-                .setInterpolator(FAST_OUT_SLOW_IN_INTERPOLATOR)
-                .start()
+            .translationY(0f)
+            .setDuration(400)
+            .setListener(listener)
+            .setInterpolator(FAST_OUT_SLOW_IN_INTERPOLATOR)
+            .start()
     }
 
     /**
@@ -77,11 +77,11 @@ object AnimatorUtil {
     fun translateHide(view: View, listener: ViewPropertyAnimatorListener) {
         view.visibility = View.VISIBLE
         ViewCompat.animate(view)
-                .translationY(350f)
-                .setDuration(400)
-                .setInterpolator(FAST_OUT_SLOW_IN_INTERPOLATOR)
-                .setListener(listener)
-                .start()
+            .translationY(350f)
+            .setDuration(400)
+            .setInterpolator(FAST_OUT_SLOW_IN_INTERPOLATOR)
+            .setListener(listener)
+            .start()
     }
 
 }
