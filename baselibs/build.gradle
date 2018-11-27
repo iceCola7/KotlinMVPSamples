@@ -52,4 +52,6 @@ dependencies {
     api 'com.orhanobut:logger:2.2.0'
     // multidex
     api 'com.android.support:multidex:1.0.3'
+    // spinkit
+    api "com.github.ybq:Android-SpinKit:1.2.0"
 }
