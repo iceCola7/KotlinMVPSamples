@@ -1,4 +1,4 @@
-package com.cxz.kotlin.samples
+package com.cxz.kotlin.samples.mvp.presenter
 
 import com.cxz.kotlin.baselibs.ext.ss
 import com.cxz.kotlin.baselibs.ext.sss
@@ -6,6 +6,8 @@ import com.cxz.kotlin.baselibs.http.exception.ErrorStatus
 import com.cxz.kotlin.baselibs.http.exception.ExceptionHandle
 import com.cxz.kotlin.baselibs.mvp.BasePresenter
 import com.cxz.kotlin.baselibs.rx.SchedulerUtils
+import com.cxz.kotlin.samples.mvp.contract.MainContract
+import com.cxz.kotlin.samples.mvp.model.MainModel
 
 /**
  * @author admin

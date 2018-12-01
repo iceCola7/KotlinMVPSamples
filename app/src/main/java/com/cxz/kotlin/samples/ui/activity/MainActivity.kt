@@ -1,7 +1,10 @@
-package com.cxz.kotlin.samples
+package com.cxz.kotlin.samples.ui.activity
 
 import com.cxz.kotlin.baselibs.base.BaseMvpTitleActivity
+import com.cxz.kotlin.samples.mvp.presenter.MainPresenter
+import com.cxz.kotlin.samples.R
 import com.cxz.kotlin.samples.bean.Banner
+import com.cxz.kotlin.samples.mvp.contract.MainContract
 import com.cxz.kotlin.samples.utils.DialogUtil
 import kotlinx.android.synthetic.main.activity_main.*
 

@@ -1,4 +1,4 @@
-package com.cxz.kotlin.samples
+package com.cxz.kotlin.samples.mvp.contract
 
 import com.cxz.kotlin.baselibs.mvp.IModel
 import com.cxz.kotlin.baselibs.mvp.IPresenter
