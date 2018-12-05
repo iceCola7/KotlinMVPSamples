@@ -94,6 +94,8 @@ class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presen
 }
 ```
 
+## LICENSE
+
 ```
 Copyright 2018 iceCola7 
 
