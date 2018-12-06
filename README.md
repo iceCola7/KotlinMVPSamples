@@ -21,19 +21,15 @@
 
 ```
 interface MainContract {
-
     interface View : IView {
         fun showBanners(banners: MutableList<Banner>)
     }
-
     interface Presenter : IPresenter<View> {
         fun getBanner2()
     }
-
     interface Model : IModel {
         fun getBanners(): Observable<HttpResult<MutableList<Banner>>>
     }
-
 }
 ```
 
@@ -42,11 +38,9 @@ interface MainContract {
 
 ```
 class MainModel : BaseModel(), MainContract.Model {
-
     override fun getBanners(): Observable<HttpResult<MutableList<Banner>>> {
         return MainRetrofit.service.getHomeBanner()
     }
-
 }
 ```
 
@@ -56,15 +50,12 @@ class MainModel : BaseModel(), MainContract.Model {
 
 ```
 class MainPresenter : BasePresenter<MainContract.Model, MainContract.View>(), MainContract.Presenter {
-
     override fun createModel(): MainContract.Model? = MainModel()
-
     override fun getBanner2() {
         mModel?.getBanners()?.ss(mModel, mView) {
             mView?.showBanners(it.data)
         }
     }
-
 }
 ```
 
@@ -73,24 +64,17 @@ class MainPresenter : BasePresenter<MainContract.Model, MainContract.View>(), Ma
 
 ```
 class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presenter>(), MainContract.View {
-
     override fun attachChildLayoutRes(): Int = R.layout.activity_main
-
     override fun createPresenter(): MainContract.Presenter = MainPresenter()
-
     override fun initView() {
     }
-
     override fun initData() {
     }
-
     override fun start() {
     }
-
     override fun showBanners(banners: MutableList<Banner>) {
         tv_result.text = banners.toString()
     }
-
 }
 ```
 
