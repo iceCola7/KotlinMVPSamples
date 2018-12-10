@@ -4,7 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
-import android.support.multidex.MultiDexApplication
+import android.support.multidex.MultiDex
 import android.util.Log
 import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
@@ -15,12 +15,15 @@ import kotlin.properties.Delegates
  * @date 2018/11/18
  * @desc BaseApp
  */
-abstract class BaseApp : MultiDexApplication() {
+open class BaseApp : Application() {
 
     private var refWatcher: RefWatcher? = null
 
     companion object {
-        private val TAG = "BaseApp"
+
+        @JvmField
+        val TAG = "BaseApp"
+
         var instance: Context by Delegates.notNull()
             private set
 
@@ -36,6 +39,11 @@ abstract class BaseApp : MultiDexApplication() {
         instance = this
         refWatcher = setupLeakCanary()
         registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks)
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 
     private fun setupLeakCanary(): RefWatcher {
