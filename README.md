@@ -1,18 +1,23 @@
-# Kotlin版MVP框架
+# Kotlin 版 MVP 基础框架
 
-### 简介
+- **项目 [https://github.com/iceCola7/WanAndroid](https://github.com/iceCola7/WanAndroid) 已经使用该框架**
+- **Java 版 MVP 基础框架：[https://github.com/iceCola7/MVPSamples](https://github.com/iceCola7/MVPSamples)**
+
+## 简介
 
 > 快速搭建 Kotlin+MVP+RxJava+Retrofit+EventBus 的框架，方便快速开发新项目、减少开发成本，让所写的代码更加简洁，让开发者只需要关注业务的实现。
 
-### 代码结构
+## 代码结构
 
 ![](/art/base.png)
 
-### 如何使用？
+## 如何使用？
 
-> 只需要五步就可以实现MVP架构。
+> 只需要五步就可以实现 MVP 架构。
 
 ##### 第一步：导入baselibs库
+
+> `Clone or Download` 后导入 `baselibs` 库，再根据需求自行修改即可。
 
 ##### 第二步：定义一个Contract
 
