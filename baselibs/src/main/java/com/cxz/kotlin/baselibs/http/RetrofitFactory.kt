@@ -30,11 +30,11 @@ abstract class RetrofitFactory<T> {
     abstract fun getService(): Class<T>
 
     init {
-        mBaseUrl = baseUrl()
+        mBaseUrl = this.baseUrl()
         if (mBaseUrl.isEmpty()) {
-            throw RuntimeException("base url is not empty!")
+            throw RuntimeException("base url can not be empty!")
         }
-        service = getRetrofit()!!.create(getService())
+        service = getRetrofit()!!.create(this.getService())
     }
 
     /**
