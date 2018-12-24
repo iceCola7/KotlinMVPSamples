@@ -18,7 +18,7 @@
 - `BaseMvpActivity` 、 `BaseMvpFragment` 分别继承 `BaseActivity` 和 `BaseFragment` 并实现了 `IView` 接口，将 `MVP` 基础架构封装起来；注：如果想使用 `MVP` 架构就继承 `BaseMvpActivity` 或者 `BaseMvpFragment` ，如果不适用 `MVP` 架构就继承 `BaseActivity` 或者 `BaseFragment` ；
 - `BaseMvpTitleActivity` 继承 `BaseMvpActivity` ，简单了封装了 `Toolbar`，可扩展 。
 
-#### 2. ext 相关的封装
+#### 2. ext 相关的封装（主要用到了 Kotlin 扩展函数）
 
 - 封装 `loge` 、 `showToast` 、 `showSnackMsg` 、`ss` 、 `sss` 等通用方法，项目中可以直接调用；
 - `ss` 、 `sss` ，这两个方法主要是对网络请求的统一封装，使用起来非常方便（**亮点**）；
@@ -32,7 +32,8 @@ addDisposable(
     }
 )
 ```
-> 这里贴上 `ss` 和 `sss` 方法的代码：
+
+> 这里贴上 `ss` 和 `sss` 方法的代码（这两个方法用起来真的太爽了）：
 
 ```
 fun <T : BaseBean> Observable<T>.ss(
