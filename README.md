@@ -121,7 +121,7 @@ interface MainApi {
 
 #### 4. MVP 基础架构
 
-> MVP 即是 Model , View , Presenter 三层，实现了 Model 层和 View 层完全解耦。
+**MVP 即是 Model , View , Presenter 三层，把 Activity 中的 UI 逻辑抽象成 View 接口，把业务逻辑抽象成 Presenter 接口， Model 类还是原来的 Model ，实现了 Model 层和 View 层完全解耦。**
 
 > 用户触发 V 层事件， V 层把事件通知 P 层， P 层通知 M 层处理这个事件， M 层处理完之后把结果发送给 P 层， P 层再发送给 V 层，最后 V 层做出相应的处理，这是 MVP 架构的一整套流程。
 
