@@ -241,9 +241,11 @@ class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presen
 }
 ```
 
+**至此， `Kotlin` 基础框架已经搭建完成，如有错误之处还请指正。**
+
 ## 最后
 
-完整的项目地址：**[https://github.com/iceCola7/KotlinMVPSamples](https://github.com/iceCola7/KotlinMVPSamples)**，若需要敬请查看。
+完整的项目地址：**[https://github.com/iceCola7/KotlinMVPSamples](https://github.com/iceCola7/KotlinMVPSamples)**。
 
 ## LICENSE
 
