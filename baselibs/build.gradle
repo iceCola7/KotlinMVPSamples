@@ -75,3 +75,5 @@ publish {
     website = 'https://github.com/iceCola7/KotlinMVPSamples'  // github 托管地址
     dryRun = false
 }
+
+apply from: '../bintray.gradle'
