@@ -9,7 +9,7 @@ import android.util.Log
 import android.widget.TextView
 import com.cxz.kotlin.baselibs.R
 import com.cxz.kotlin.baselibs.bean.BaseBean
-import com.cxz.kotlin.baselibs.http.exception.ErrorStatus
+import com.cxz.kotlin.baselibs.http.HttpStatus
 import com.cxz.kotlin.baselibs.http.exception.ExceptionHandle
 import com.cxz.kotlin.baselibs.http.function.RetryWithDelay
 import com.cxz.kotlin.baselibs.mvp.IModel
@@ -58,7 +58,8 @@ fun <T : BaseBean> Observable<T>.ss(
     model: IModel?,
     view: IView?,
     isShowLoading: Boolean = true,
-    onSuccess: (T) -> Unit
+    onSuccess: (T) -> Unit,
+    onError: ((T) -> Unit)? = null
 ) {
     this.compose(SchedulerUtils.ioToMain())
         .retryWhen(RetryWithDelay())
@@ -68,9 +69,7 @@ fun <T : BaseBean> Observable<T>.ss(
             }
 
             override fun onSubscribe(d: Disposable) {
-                if (isShowLoading) {
-                    view?.showLoading()
-                }
+                if (isShowLoading) view?.showLoading()
                 model?.addDisposable(d)
                 if (!NetWorkUtil.isConnected()) {
                     view?.showDefaultMsg("当前网络不可用，请检查网络设置")
@@ -80,12 +79,20 @@ fun <T : BaseBean> Observable<T>.ss(
             }
 
             override fun onNext(t: T) {
+                view?.hideLoading()
                 when {
-                    t.errorCode == ErrorStatus.SUCCESS -> onSuccess.invoke(t)
-                    t.errorCode == ErrorStatus.TOKEN_INVAILD -> {
+                    t.errorCode == HttpStatus.SUCCESS -> onSuccess.invoke(t)
+                    t.errorCode == HttpStatus.TOKEN_INVALID -> {
                         // Token 过期，重新登录
                     }
-                    else -> view?.showDefaultMsg(t.errorMsg)
+                    else -> {
+                        if (onError != null) {
+                            onError.invoke(t)
+                        } else {
+                            if (t.errorMsg.isNotEmpty())
+                                view?.showDefaultMsg(t.errorMsg)
+                        }
+                    }
                 }
             }
 
@@ -99,22 +106,28 @@ fun <T : BaseBean> Observable<T>.ss(
 fun <T : BaseBean> Observable<T>.sss(
     view: IView?,
     isShowLoading: Boolean = true,
-    onSuccess: (T) -> Unit
+    onSuccess: (T) -> Unit,
+    onError: ((T) -> Unit)? = null
 ): Disposable {
-    if (isShowLoading) {
-        view?.showLoading()
-    }
+    if (isShowLoading) view?.showLoading()
     return this.compose(SchedulerUtils.ioToMain())
         .retryWhen(RetryWithDelay())
         .subscribe({
+            view?.hideLoading()
             when {
-                it.errorCode == ErrorStatus.SUCCESS -> onSuccess.invoke(it)
-                it.errorCode == ErrorStatus.TOKEN_INVAILD -> {
+                it.errorCode == HttpStatus.SUCCESS -> onSuccess.invoke(it)
+                it.errorCode == HttpStatus.TOKEN_INVALID -> {
                     // Token 过期，重新登录
                 }
-                else -> view?.showDefaultMsg(it.errorMsg)
+                else -> {
+                    if (onError != null) {
+                        onError.invoke(it)
+                    } else {
+                        if (it.errorMsg.isNotEmpty())
+                            view?.showDefaultMsg(it.errorMsg)
+                    }
+                }
             }
-            view?.hideLoading()
         }, {
             view?.hideLoading()
             view?.showError(ExceptionHandle.handleException(it))
