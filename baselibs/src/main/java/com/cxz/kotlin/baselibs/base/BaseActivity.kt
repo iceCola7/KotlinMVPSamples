@@ -12,6 +12,7 @@ import com.cxz.kotlin.baselibs.app.BaseApp
 import com.cxz.kotlin.baselibs.utils.CommonUtil
 import com.cxz.kotlin.baselibs.utils.KeyBoardUtil
 import com.cxz.kotlin.baselibs.utils.StatusBarUtil
+import com.tbruyelle.rxpermissions2.RxPermissions
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -46,6 +47,13 @@ abstract class BaseActivity : AppCompatActivity() {
      * 是否使用 EventBus
      */
     open fun useEventBus(): Boolean = false
+
+    /**
+     * 获取权限处理类
+     */
+    protected val rxPermissions: RxPermissions by lazy {
+        RxPermissions(this)
+    }
 
     /**
      * 设置状态栏的背景颜色

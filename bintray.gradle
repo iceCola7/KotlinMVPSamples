@@ -1,7 +1,7 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = rootProject.ext.android["versionName"]  //这个是版本号，必须填写
+version = "1.0.0"//rootProject.ext.android["versionName"]  //这个是版本号，必须填写
 
 def siteUrl = 'https://github.com/iceCola7/KotlinMVPSamples'      // 项目的主页   这个是说明，可随便填
 def gitUrl = 'https://github.com/iceCola7/KotlinMVPSamples'      // Git仓库的url  这个是说明，可随便填

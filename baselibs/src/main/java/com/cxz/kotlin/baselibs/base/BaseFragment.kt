@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.cxz.kotlin.baselibs.app.BaseApp
+import com.tbruyelle.rxpermissions2.RxPermissions
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -50,6 +51,13 @@ abstract class BaseFragment : Fragment() {
      * 是否使用 EventBus
      */
     open fun useEventBus(): Boolean = false
+
+    /**
+     * 获取权限处理类
+     */
+    protected val rxPermissions: RxPermissions by lazy {
+        RxPermissions(this)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(attachLayoutRes(), null)
