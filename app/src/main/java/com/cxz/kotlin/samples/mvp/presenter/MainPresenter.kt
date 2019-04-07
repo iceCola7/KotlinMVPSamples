@@ -2,7 +2,7 @@ package com.cxz.kotlin.samples.mvp.presenter
 
 import com.cxz.kotlin.baselibs.ext.ss
 import com.cxz.kotlin.baselibs.ext.sss
-import com.cxz.kotlin.baselibs.http.exception.ErrorStatus
+import com.cxz.kotlin.baselibs.http.HttpStatus
 import com.cxz.kotlin.baselibs.http.exception.ExceptionHandle
 import com.cxz.kotlin.baselibs.mvp.BasePresenter
 import com.cxz.kotlin.baselibs.rx.SchedulerUtils
@@ -19,40 +19,59 @@ class MainPresenter : BasePresenter<MainContract.Model, MainContract.View>(), Ma
     override fun createModel(): MainContract.Model? = MainModel()
 
     override fun getBanner() {
-
         mView?.showLoading()
-        addDisposable(
-            mModel?.getBanners()
+        addDisposable(mModel?.getBanners()
                 ?.compose(SchedulerUtils.ioToMain())
                 ?.subscribe({
-                    if (it.errorCode == ErrorStatus.SUCCESS) {
-                        mView?.showBanners(it.data)
-                    } else if (it.errorCode == ErrorStatus.TOKEN_INVAILD) {
-                        // Token 过期，重新登录
-                    } else {
-                        mView?.showError(it.errorMsg)
+                    mView?.hideLoading()
+                    when {
+                        it.errorCode == HttpStatus.SUCCESS -> mView?.showBanners(it.data)
+                        it.errorCode == HttpStatus.TOKEN_INVALID -> {
+                            // Token 过期，重新登录
+                        }
+                        else -> mView?.showError(it.errorMsg)
                     }
-                    mView?.hideLoading()
                 }, {
-                    ExceptionHandle.handleException(it)
                     mView?.hideLoading()
+                    mView?.showDefaultMsg(ExceptionHandle.handleException(it))
                 })
         )
-
     }
 
     override fun getBanner2() {
-        mModel?.getBanners()?.ss(mModel, mView) {
+        mModel?.getBanners()?.ss(mModel, mView, onSuccess = {
             mView?.showBanners(it.data)
-        }
+        })
     }
 
     override fun getBanner3() {
-        addDisposable(
-            mModel?.getBanners()?.sss(mView) {
-                mView?.showBanners(it.data)
-            }
-        )
+        addDisposable(mModel?.getBanners()?.sss(mView, onSuccess = {
+            mView?.showBanners(it.data)
+        }))
+    }
+
+    override fun login(username: String, password: String) {
+        mModel?.login(username, password)?.ss(mModel, mView, onSuccess = {
+            mView?.loginSuccess()
+        })
+    }
+
+    override fun getBannerList() {
+        mModel?.getBannerList()?.ss(mModel, mView, onSuccess = {
+            mView?.showBannerList(it.data)
+        })
+    }
+
+    override fun getCollectList(page: Int) {
+        mModel?.getCollectList(page)?.ss(mModel, mView, onSuccess = {
+            mView?.showCollectList(it.data)
+        })
+    }
+
+    override fun logout() {
+        mModel?.logout()?.ss(mModel, mView, onSuccess = {
+            mView?.logoutSuccess()
+        })
     }
 
 }
