@@ -60,6 +60,7 @@ abstract class BaseSubscriber<T : BaseBean> : ResourceSubscriber<T> {
     }
 
     override fun onError(e: Throwable) {
+        mView?.hideLoading()
         if (mView == null) {
             throw RuntimeException("mView can not be null")
         }
