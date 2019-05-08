@@ -1,6 +1,7 @@
 package com.cxz.kotlin.samples.app
 
 import android.content.Context
+import android.support.multidex.MultiDex
 import com.cxz.kotlin.baselibs.app.BaseApp
 import kotlin.properties.Delegates
 
@@ -19,6 +20,11 @@ class App : BaseApp() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 
 }
