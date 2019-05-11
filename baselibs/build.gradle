@@ -3,12 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'//kotlin扩展
 apply plugin: 'kotlin-kapt'//
 
-//每个module都要添加
-kapt {
-    arguments {
-        arg("moduleName", project.getName())
-    }
-}
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
