@@ -6,6 +6,8 @@ import android.content.Context
 import android.os.Bundle
 import android.support.multidex.MultiDex
 import android.util.Log
+import com.alibaba.android.arouter.launcher.ARouter
+import com.cxz.kotlin.baselibs.BuildConfig
 import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
 import kotlin.properties.Delegates
@@ -39,6 +41,15 @@ open class BaseApp : Application() {
         instance = this
         refWatcher = setupLeakCanary()
         registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks)
+        initRouter()
+    }
+
+    private fun initRouter() {
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog()
+            ARouter.openDebug()
+        }
+        ARouter.init(this)
     }
 
     override fun attachBaseContext(base: Context?) {

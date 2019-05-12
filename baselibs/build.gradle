@@ -1,8 +1,13 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'//kotlin扩展
-apply plugin: 'kotlin-kapt'//
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
@@ -12,7 +17,7 @@ android {
         versionName "1.0.0"
 
         multiDexEnabled true
-        
+
     }
 
     buildTypes {
@@ -22,7 +27,7 @@ android {
         }
     }
 
-    lintOptions{
+    lintOptions {
         abortOnError false
     }
 
@@ -45,31 +50,23 @@ dependencies {
     api rootProject.ext.networkLibs
     // RxJava2
     api rootProject.ext.rxJavaLibs
+    // commonLibs
+    api rootProject.ext.commonLibs
 
-    // glide
-    api 'com.github.bumptech.glide:glide:4.8.0'
-    // eventbus
-    api 'org.greenrobot:eventbus:3.1.1'
-    // rxpermissions
-    api 'com.github.tbruyelle:rxpermissions:0.10.2'
-    // logger
-    api 'com.orhanobut:logger:2.2.0'
-    // multidex
-    api 'com.android.support:multidex:1.0.3'
-    // spinkit
-    api "com.github.ybq:Android-SpinKit:1.2.0"
+    kapt rootProject.ext.otherDeps["arouter-compiler"]
+
 }
 
-apply plugin: 'com.novoda.bintray-release'
-publish {
-    repoName = 'maven'  // 仓库名，没有填写默认仓库是maven
-    userOrg = 'icecola7'  // bintray注册的用户名
-    groupId = 'com.cxz.kotlin'  // implementation引用时的第1部分groupId
-    artifactId = 'baselibs'  // implementation引用时的第2部分项目名
-    publishVersion = '1.0.0'  // implementation引用时的第3部分版本号
-    desc = 'This is a kotlin mvp framework to help you easily achieve mvp structure.' // 项目描述
-    website = 'https://github.com/iceCola7/KotlinMVPSamples'  // github 托管地址
-    dryRun = false
-}
+//apply plugin: 'com.novoda.bintray-release'
+//publish {
+//    repoName = 'maven'  // 仓库名，没有填写默认仓库是maven
+//    userOrg = 'icecola7'  // bintray注册的用户名
+//    groupId = 'com.cxz.kotlin'  // implementation引用时的第1部分groupId
+//    artifactId = 'baselibs'  // implementation引用时的第2部分项目名
+//    publishVersion = '1.0.0'  // implementation引用时的第3部分版本号
+//    desc = 'This is a kotlin mvp framework to help you easily achieve mvp structure.' // 项目描述
+//    website = 'https://github.com/iceCola7/KotlinMVPSamples'  // github 托管地址
+//    dryRun = false
+//}
 
 //apply from: '../bintray.gradle'
