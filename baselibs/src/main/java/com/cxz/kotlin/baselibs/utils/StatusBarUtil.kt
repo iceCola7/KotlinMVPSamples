@@ -15,7 +15,6 @@ import android.view.WindowManager
 import android.widget.LinearLayout
 import com.cxz.kotlin.baselibs.R
 
-
 /**
  * Created by chenxz on 2018/4/21.
  * 沉浸式状态栏工具类
@@ -251,10 +250,7 @@ object StatusBarUtil {
      * @param color          状态栏颜色值
      * @param statusBarAlpha 状态栏透明度 @IntRange(from = 0, to = 255)
      */
-    fun setColorForDrawerLayout(
-        activity: Activity, drawerLayout: DrawerLayout, @ColorInt color: Int,
-        statusBarAlpha: Int
-    ) {
+    fun setColorForDrawerLayout(activity: Activity, drawerLayout: DrawerLayout, @ColorInt color: Int, statusBarAlpha: Int) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             return
         }
@@ -280,10 +276,8 @@ object StatusBarUtil {
         // 内容布局不是 LinearLayout 时,设置padding top
         if (contentLayout !is LinearLayout && contentLayout.getChildAt(1) != null) {
             contentLayout.getChildAt(1)
-                .setPadding(
-                    contentLayout.paddingLeft, getStatusBarHeight(activity) + contentLayout.paddingTop,
-                    contentLayout.paddingRight, contentLayout.paddingBottom
-                )
+                    .setPadding(contentLayout.paddingLeft, getStatusBarHeight(activity) + contentLayout.paddingTop,
+                            contentLayout.paddingRight, contentLayout.paddingBottom)
         }
         // 设置属性
         setDrawerLayoutProperty(drawerLayout, contentLayout)
@@ -439,8 +433,8 @@ object StatusBarUtil {
      * @param needOffsetView 需要向下偏移的 View
      */
     fun setTranslucentForImageView(
-        activity: Activity, statusBarAlpha: Int,
-        needOffsetView: View?
+            activity: Activity, statusBarAlpha: Int,
+            needOffsetView: View?
     ) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             return
@@ -454,8 +448,8 @@ object StatusBarUtil {
             }
             val layoutParams = needOffsetView!!.layoutParams as ViewGroup.MarginLayoutParams
             layoutParams.setMargins(
-                layoutParams.leftMargin, layoutParams.topMargin + getStatusBarHeight(activity),
-                layoutParams.rightMargin, layoutParams.bottomMargin
+                    layoutParams.leftMargin, layoutParams.topMargin + getStatusBarHeight(activity),
+                    layoutParams.rightMargin, layoutParams.bottomMargin
             )
             needOffsetView!!.setTag(TAG_KEY_HAVE_SET_OFFSET, true)
         }
@@ -489,8 +483,8 @@ object StatusBarUtil {
      * @param needOffsetView 需要向下偏移的 View
      */
     fun setTranslucentForImageViewInFragment(
-        activity: Activity, statusBarAlpha: Int,
-        needOffsetView: View
+            activity: Activity, statusBarAlpha: Int,
+            needOffsetView: View
     ) {
         setTranslucentForImageView(activity, statusBarAlpha, needOffsetView)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -507,11 +501,11 @@ object StatusBarUtil {
         val decorView = activity.window.decorView as ViewGroup
         val fakeStatusBarView = decorView.findViewById<View>(FAKE_STATUS_BAR_VIEW_ID)
         if (fakeStatusBarView != null) {
-            fakeStatusBarView!!.setVisibility(View.GONE)
+            fakeStatusBarView!!.visibility = View.GONE
         }
         val fakeTranslucentView = decorView.findViewById<View>(FAKE_TRANSLUCENT_VIEW_ID)
         if (fakeTranslucentView != null) {
-            fakeTranslucentView!!.setVisibility(View.GONE)
+            fakeTranslucentView!!.visibility = View.GONE
         }
     }
 
@@ -520,8 +514,7 @@ object StatusBarUtil {
         setMIUIStatusBarDarkIcon(activity, true)
         setMeizuStatusBarDarkIcon(activity, true)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR //or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
     }
 
@@ -530,7 +523,7 @@ object StatusBarUtil {
         setMIUIStatusBarDarkIcon(activity, false)
         setMeizuStatusBarDarkIcon(activity, false)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            //activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
     }
 
@@ -544,7 +537,7 @@ object StatusBarUtil {
             val field = layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE")
             val darkModeFlag = field.getInt(layoutParams)
             val extraFlagField =
-                clazz.getMethod("setExtraFlags", Int::class.javaPrimitiveType, Int::class.javaPrimitiveType)
+                    clazz.getMethod("setExtraFlags", Int::class.javaPrimitiveType, Int::class.javaPrimitiveType)
             extraFlagField.invoke(activity.window, if (darkIcon) darkModeFlag else 0, darkModeFlag)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -628,12 +621,7 @@ object StatusBarUtil {
      * @param alpha    透明值
      * @return 状态栏矩形条
      */
-    private fun createStatusBarView(
-        activity: Activity, @ColorInt color: Int, @IntRange(
-            from = 0,
-            to = 255
-        ) alpha: Int
-    ): View {
+    private fun createStatusBarView(activity: Activity, @ColorInt color: Int, @IntRange(from = 0, to = 255) alpha: Int): View {
         // 绘制一个和状态栏一样高的矩形
         val statusBarView = View(activity)
         val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity))
@@ -666,15 +654,11 @@ object StatusBarUtil {
     private fun setTransparentForWindow(activity: Activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activity.window.statusBarColor = Color.TRANSPARENT
-            activity.window
-                .decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+            activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            activity.window
-                .setFlags(
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
-                )
+            activity.window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         }
     }
 
@@ -741,79 +725,5 @@ object StatusBarUtil {
         blue = (blue * a + 0.5).toInt()
         return 0xff shl 24 or (red shl 16) or (green shl 8) or blue
     }
-
-    // =============================================================================================
-    /**
-     * 设置状态栏字体颜色为黑色
-     * @param activity
-     * @param dark 是否为黑色
-     */
-    fun setLightStatusBar(activity: Activity, dark: Boolean) {
-        when (RomUtil.getLightStatausBarAvailableRomType()) {
-            RomUtil.AvailableRomType.MIUI -> setMIUILightStatusBar(activity, dark)
-
-            RomUtil.AvailableRomType.FLYME -> setFlymeLightStatusBar(activity, dark)
-
-            RomUtil.AvailableRomType.ANDROID_NATIVE -> setAndroidNativeLightStatusBar(activity, dark)
-
-            RomUtil.AvailableRomType.NA -> {
-            }
-        }// N/A do nothing
-    }
-
-    private fun setMIUILightStatusBar(activity: Activity, darkmode: Boolean): Boolean {
-        val clazz = activity.window.javaClass
-        try {
-            var darkModeFlag = 0
-            val layoutParams = Class.forName("android.view.MiuiWindowManager\$LayoutParams")
-            val field = layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE")
-            darkModeFlag = field.getInt(layoutParams)
-            val extraFlagField =
-                clazz.getMethod("setExtraFlags", Int::class.javaPrimitiveType, Int::class.javaPrimitiveType)
-            extraFlagField.invoke(activity.window, if (darkmode) darkModeFlag else 0, darkModeFlag)
-            return true
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        return false
-    }
-
-    private fun setFlymeLightStatusBar(activity: Activity?, dark: Boolean): Boolean {
-        var result = false
-        if (activity != null) {
-            val lp = activity.window.attributes
-            val darkFlag = WindowManager.LayoutParams::class.java
-                .getDeclaredField("MEIZU_FLAG_DARK_STATUS_BAR_ICON")
-            val meizuFlags = WindowManager.LayoutParams::class.java
-                .getDeclaredField("meizuFlags")
-            darkFlag.isAccessible = true
-            meizuFlags.isAccessible = true
-            val bit = darkFlag.getInt(null)
-            var value = meizuFlags.getInt(lp)
-            value = if (dark) {
-                value or bit
-            } else {
-                value and bit.inv()
-            }
-            meizuFlags.setInt(lp, value)
-            activity.window.attributes = lp
-            result = true
-        }
-        return result
-    }
-
-    private fun setAndroidNativeLightStatusBar(activity: Activity, dark: Boolean) {
-        val decor = activity.window.decorView
-        if (dark) {
-            decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        } else {
-            // We want to change tint color to white again.
-            // You can also record the flags in advance so that you can turn UI back completely if
-            // you have set other flags before, such as translucent or full screen.
-            decor.systemUiVisibility = 0
-        }
-    }
-    //================================================================================
 
 }

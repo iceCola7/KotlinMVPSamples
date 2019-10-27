@@ -68,7 +68,11 @@ abstract class BaseActivity : AppCompatActivity() {
      * @param dark true: 黑色  false: 白色
      */
     fun setStatusBarIcon(dark: Boolean) {
-        StatusBarUtil.setLightStatusBar(this, dark)
+        if (dark) {
+            StatusBarUtil.setLightMode(this)
+        } else {
+            StatusBarUtil.setDarkMode(this)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
