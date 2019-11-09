@@ -19,12 +19,11 @@ import kotlin.properties.Delegates
  */
 open class BaseApp : Application() {
 
+    private val TAG = "BaseApp"
+
     private var refWatcher: RefWatcher? = null
 
     companion object {
-
-        @JvmField
-        val TAG = "BaseApp"
 
         var instance: Context by Delegates.notNull()
             private set
@@ -39,9 +38,16 @@ open class BaseApp : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        refWatcher = setupLeakCanary()
-        registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks)
+        initLeakCanary()
         initRouter()
+    }
+
+    private fun initLeakCanary() {
+        refWatcher = if (LeakCanary.isInAnalyzerProcess(this))
+            RefWatcher.DISABLED
+        else LeakCanary.install(this)
+
+        registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks)
     }
 
     private fun initRouter() {
@@ -57,13 +63,7 @@ open class BaseApp : Application() {
         MultiDex.install(this)
     }
 
-    private fun setupLeakCanary(): RefWatcher {
-        return if (LeakCanary.isInAnalyzerProcess(this)) {
-            RefWatcher.DISABLED
-        } else LeakCanary.install(this)
-    }
-
-    private val mActivityLifecycleCallbacks = object : Application.ActivityLifecycleCallbacks {
+    private val mActivityLifecycleCallbacks = object : ActivityLifecycleCallbacks {
         override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
             NLog.d(TAG, "onCreated: " + activity.componentName.className)
         }
@@ -73,19 +73,19 @@ open class BaseApp : Application() {
         }
 
         override fun onActivityResumed(activity: Activity) {
-
+            NLog.d(TAG, "onResume: " + activity.componentName.className)
         }
 
         override fun onActivityPaused(activity: Activity) {
-
+            NLog.d(TAG, "onPause: " + activity.componentName.className)
         }
 
         override fun onActivityStopped(activity: Activity) {
-
+            NLog.d(TAG, "onStop: " + activity.componentName.className)
         }
 
         override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
-
+            NLog.d(TAG, "onSaveInstanceState: " + activity.componentName.className)
         }
 
         override fun onActivityDestroyed(activity: Activity) {
