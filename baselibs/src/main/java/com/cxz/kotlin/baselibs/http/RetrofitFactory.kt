@@ -22,11 +22,12 @@ import java.util.concurrent.TimeUnit
  */
 abstract class RetrofitFactory<T> {
 
+    var service: T
     private var mBaseUrl = ""
     private var retrofit: Retrofit? = null
-    var service: T
 
     abstract fun baseUrl(): String
+
     abstract fun getService(): Class<T>
 
     init {
@@ -38,7 +39,7 @@ abstract class RetrofitFactory<T> {
     }
 
     /**
-     * 获取 Retrofit
+     * 获取 Retrofit 实例对象
      */
     private fun getRetrofit(): Retrofit? {
         if (retrofit == null) {
@@ -46,7 +47,7 @@ abstract class RetrofitFactory<T> {
                 if (retrofit == null) {
                     retrofit = Retrofit.Builder()
                         .baseUrl(mBaseUrl)  // baseUrl
-                        .client(getOkHttpClient())
+                        .client(attachOkHttpClient())
                         //.addConverterFactory(GsonConverterFactory.create())
                         .addConverterFactory(MoshiConverterFactory.create())
                         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -58,9 +59,10 @@ abstract class RetrofitFactory<T> {
     }
 
     /**
-     * 获取 OkHttpClient
+     * 获取 OkHttpClient 实例对象
+     * 子类可重写，自定义 OkHttpClient
      */
-    private fun getOkHttpClient(): OkHttpClient {
+    open fun attachOkHttpClient(): OkHttpClient {
         val builder = OkHttpClient().newBuilder()
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         if (BuildConfig.DEBUG) {

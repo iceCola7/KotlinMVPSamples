@@ -15,8 +15,4 @@ object HttpConstant {
     const val SET_COOKIE_KEY = "set-cookie"
     const val COOKIE_NAME = "Cookie"
 
-    const val SAVE_USER_LOGIN_KEY = "user/login"
-    const val SAVE_USER_REGISTER_KEY = "user/register"
-    const val REMOVE_USER_LOGOUT_KEY = "user/logout"
-
 }

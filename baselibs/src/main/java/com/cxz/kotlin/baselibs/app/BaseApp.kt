@@ -5,9 +5,9 @@ import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.support.multidex.MultiDex
-import android.util.Log
 import com.alibaba.android.arouter.launcher.ARouter
 import com.cxz.kotlin.baselibs.BuildConfig
+import com.cxz.kotlin.baselibs.utils.NLog
 import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
 import kotlin.properties.Delegates
@@ -65,11 +65,11 @@ open class BaseApp : Application() {
 
     private val mActivityLifecycleCallbacks = object : Application.ActivityLifecycleCallbacks {
         override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-            Log.d(TAG, "onCreated: " + activity.componentName.className)
+            NLog.d(TAG, "onCreated: " + activity.componentName.className)
         }
 
         override fun onActivityStarted(activity: Activity) {
-            Log.d(TAG, "onStart: " + activity.componentName.className)
+            NLog.d(TAG, "onStart: " + activity.componentName.className)
         }
 
         override fun onActivityResumed(activity: Activity) {
@@ -89,7 +89,7 @@ open class BaseApp : Application() {
         }
 
         override fun onActivityDestroyed(activity: Activity) {
-            Log.d(TAG, "onDestroy: " + activity.componentName.className)
+            NLog.d(TAG, "onDestroy: " + activity.componentName.className)
         }
     }
 }

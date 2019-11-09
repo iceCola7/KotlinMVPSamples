@@ -19,15 +19,18 @@ class CookieInterceptor : Interceptor {
         val domain = request.url().host()
 
         // set-cookie maybe has multi, login to save cookie
-        if ((requestUrl.contains(HttpConstant.SAVE_USER_LOGIN_KEY) || requestUrl.contains(HttpConstant.SAVE_USER_REGISTER_KEY))
-                && !response.headers(HttpConstant.SET_COOKIE_KEY).isEmpty()) {
+        if (
+        //(requestUrl.contains(HttpConstant.SAVE_USER_LOGIN_KEY) || requestUrl.contains(HttpConstant.SAVE_USER_REGISTER_KEY)) &&
+            response.headers(HttpConstant.SET_COOKIE_KEY).isNotEmpty()
+        ) {
             val cookies = response.headers(HttpConstant.SET_COOKIE_KEY)
             val cookie = encodeCookie(cookies)
             saveCookie(requestUrl, domain, cookie)
-        } else if (requestUrl.contains(HttpConstant.REMOVE_USER_LOGOUT_KEY) && domain.isNotEmpty()) {
-            // remove cookie
-            Preference.clearPreference(domain)
         }
+        // else if (requestUrl.contains(HttpConstant.REMOVE_USER_LOGOUT_KEY) && domain.isNotEmpty()) {
+        // remove cookie
+        // Preference.clearPreference(domain)
+        // }
         return response
     }
 
