@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.cxz.kotlin.baselibs.app.BaseApp
 import com.tbruyelle.rxpermissions2.RxPermissions
 import org.greenrobot.eventbus.EventBus
 
@@ -72,16 +71,12 @@ abstract class BaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        if (useEventBus()) {
-            EventBus.getDefault().register(this)
-        }
+        if (useEventBus()) EventBus.getDefault().register(this)
         isViewPrepare = true
         initView(view)
         initData()
         lazyLoadDataIfPrepared()
     }
-
 
     private fun lazyLoadDataIfPrepared() {
         if (userVisibleHint && isViewPrepare && !hasLoadData) {
@@ -92,9 +87,7 @@ abstract class BaseFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (useEventBus()) {
-            EventBus.getDefault().unregister(this)
-        }
-        activity?.let { BaseApp.getRefWatcher(it)?.watch(activity) }
+        if (useEventBus()) EventBus.getDefault().unregister(this)
+        // activity?.let { BaseApp.getRefWatcher(it)?.watch(activity) }
     }
 }

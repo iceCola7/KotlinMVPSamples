@@ -41,7 +41,12 @@ dependencies {
     androidTestImplementation rootProject.ext.testDeps["runner"]
     androidTestImplementation rootProject.ext.testDeps["espresso-core"]
 
+    // leakCanary
+    debugImplementation rootProject.ext.testDeps["leakcanary-debug"]
+    releaseImplementation rootProject.ext.testDeps["leakcanary-release"]
+
     implementation project(':baselibs')
+//    implementation 'com.cxz:kotlin-mvp:1.0.0'
     // qmui
     implementation 'com.qmuiteam:qmui:1.2.0'
 }

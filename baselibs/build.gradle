@@ -38,12 +38,14 @@ dependencies {
     configurations {
         all*.exclude group: 'com.android.support', module: 'support-v13'
     }
-    testImplementation rootProject.ext.testDeps["junit"]
-    androidTestImplementation rootProject.ext.testDeps["runner"]
-    androidTestImplementation rootProject.ext.testDeps["espresso-core"]
-    //leakCanary
-    debugApi rootProject.ext.testDeps["leakcanary-debug"]
-    releaseApi rootProject.ext.testDeps["leakcanary-release"]
+    // testImplementation rootProject.ext.testDeps["junit"]
+    // androidTestImplementation rootProject.ext.testDeps["runner"]
+    // androidTestImplementation rootProject.ext.testDeps["espresso-core"]
+
+    // leakCanary
+    // debugApi rootProject.ext.testDeps["leakcanary-debug"]
+    // releaseApi rootProject.ext.testDeps["leakcanary-release"]
+
     // Support库
     api rootProject.ext.supportLibs
     // 网络请求库

@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.WindowManager
-import com.cxz.kotlin.baselibs.app.BaseApp
 import com.cxz.kotlin.baselibs.utils.CommonUtil
 import com.cxz.kotlin.baselibs.utils.KeyBoardUtil
 import com.cxz.kotlin.baselibs.utils.StatusBarUtil
@@ -114,6 +113,6 @@ abstract class BaseActivity : AppCompatActivity() {
             EventBus.getDefault().unregister(this)
         }
         CommonUtil.fixInputMethodManagerLeak(this)
-        BaseApp.getRefWatcher(this)?.watch(this)
+        // BaseApp.getRefWatcher(this)?.watch(this)
     }
 }
