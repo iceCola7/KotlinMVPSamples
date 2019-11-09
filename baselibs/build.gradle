@@ -62,8 +62,8 @@ apply plugin: 'com.novoda.bintray-release'
 publish {
     repoName = 'maven'  // 仓库名，没有填写默认仓库是maven
     userOrg = 'icecola7'  // bintray注册的用户名
-    groupId = 'com.cxz.baselibs'  // implementation引用时的第1部分groupId
-    artifactId = 'kotlinmvp'  // implementation引用时的第2部分项目名
+    groupId = 'com.cxz'  // implementation引用时的第1部分groupId
+    artifactId = 'kotlin-mvp'  // implementation引用时的第2部分项目名
     publishVersion = '1.0.0'  // implementation引用时的第3部分版本号
     desc = 'This is a kotlin mvp framework to help you easily achieve mvp structure.' // 项目描述
     website = 'https://github.com/iceCola7/KotlinMVPSamples'  // github 托管地址
