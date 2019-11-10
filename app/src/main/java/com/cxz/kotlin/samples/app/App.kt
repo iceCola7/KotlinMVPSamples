@@ -1,12 +1,12 @@
 package com.cxz.kotlin.samples.app
 
 import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.support.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
-import com.cxz.kotlin.baselibs.BuildConfig
-import com.cxz.kotlin.baselibs.app.BaseApp
+import com.cxz.kotlin.baselibs.config.AppConfig
 import com.cxz.kotlin.baselibs.utils.NLog
 import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
@@ -16,7 +16,7 @@ import com.squareup.leakcanary.RefWatcher
  * @date 2018/11/21
  * @desc
  */
-class App : BaseApp() {
+class App : Application() {
 
     private val TAG = "App"
 
@@ -31,8 +31,14 @@ class App : BaseApp() {
 
     override fun onCreate() {
         super.onCreate()
+        initApp()
         initLeakCanary()
         initRouter()
+    }
+
+    private fun initApp() {
+        AppConfig.init(this)
+        AppConfig.openDebug()
     }
 
     private fun initLeakCanary() {
@@ -44,10 +50,8 @@ class App : BaseApp() {
     }
 
     private fun initRouter() {
-        if (BuildConfig.DEBUG) {
-            ARouter.openLog()
-            ARouter.openDebug()
-        }
+        ARouter.openLog()
+        ARouter.openDebug()
         ARouter.init(this)
     }
 

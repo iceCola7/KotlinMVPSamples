@@ -46,7 +46,7 @@ dependencies {
     releaseImplementation rootProject.ext.testDeps["leakcanary-release"]
 
     // implementation project(':baselibs')
-    implementation 'com.cxz:kotlin-mvp:1.0.1'
+    implementation 'com.cxz:kotlin-mvp:1.0.2'
     // qmui
     implementation 'com.qmuiteam:qmui:1.2.0'
 }
