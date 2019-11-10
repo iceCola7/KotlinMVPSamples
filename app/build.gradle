@@ -22,9 +22,9 @@ android {
         }
 
         release {
-            minifyEnabled true
-            shrinkResources true
-            zipAlignEnabled true
+            minifyEnabled false
+            // shrinkResources true
+            // zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -45,8 +45,8 @@ dependencies {
     debugImplementation rootProject.ext.testDeps["leakcanary-debug"]
     releaseImplementation rootProject.ext.testDeps["leakcanary-release"]
 
-    implementation project(':baselibs')
-//    implementation 'com.cxz:kotlin-mvp:1.0.0'
+    // implementation project(':baselibs')
+    implementation 'com.cxz:kotlin-mvp:1.0.1'
     // qmui
     implementation 'com.qmuiteam:qmui:1.2.0'
 }
