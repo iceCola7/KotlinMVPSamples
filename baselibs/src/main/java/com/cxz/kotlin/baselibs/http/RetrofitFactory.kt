@@ -1,7 +1,6 @@
 package com.cxz.kotlin.baselibs.http
 
-import com.cxz.kotlin.baselibs.BuildConfig
-import com.cxz.kotlin.baselibs.app.BaseApp
+import com.cxz.kotlin.baselibs.config.AppConfig
 import com.cxz.kotlin.baselibs.http.constant.HttpConstant
 import com.cxz.kotlin.baselibs.http.interceptor.CacheInterceptor
 import com.cxz.kotlin.baselibs.http.interceptor.CookieInterceptor
@@ -46,12 +45,12 @@ abstract class RetrofitFactory<T> {
             synchronized(RetrofitFactory::class.java) {
                 if (retrofit == null) {
                     retrofit = Retrofit.Builder()
-                        .baseUrl(mBaseUrl)  // baseUrl
-                        .client(attachOkHttpClient())
-                        //.addConverterFactory(GsonConverterFactory.create())
-                        .addConverterFactory(MoshiConverterFactory.create())
-                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                        .build()
+                            .baseUrl(mBaseUrl)  // baseUrl
+                            .client(attachOkHttpClient())
+                            //.addConverterFactory(GsonConverterFactory.create())
+                            .addConverterFactory(MoshiConverterFactory.create())
+                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                            .build()
                 }
             }
         }
@@ -65,14 +64,14 @@ abstract class RetrofitFactory<T> {
     open fun attachOkHttpClient(): OkHttpClient {
         val builder = OkHttpClient().newBuilder()
         val httpLoggingInterceptor = HttpLoggingInterceptor()
-        if (BuildConfig.DEBUG) {
+        if (AppConfig.debug) {
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         } else {
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
         }
 
         //设置 请求的缓存的大小跟位置
-        val cacheFile = File(BaseApp.instance.cacheDir, "cache")
+        val cacheFile = File(AppConfig.getApplication().cacheDir, "cache")
         val cache = Cache(cacheFile, HttpConstant.MAX_CACHE_SIZE)
 
         builder.run {

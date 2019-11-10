@@ -8,7 +8,7 @@ import android.net.NetworkInfo
 import android.net.wifi.WifiManager
 import android.provider.Settings
 import android.telephony.TelephonyManager
-import com.cxz.kotlin.baselibs.app.BaseApp
+import com.cxz.kotlin.baselibs.config.AppConfig
 import java.net.NetworkInterface
 import java.net.SocketException
 
@@ -70,7 +70,7 @@ object NetWorkUtil {
      * @return `true`: 是 `false`: 否
      */
     fun isConnected(): Boolean {
-        return isConnected(BaseApp.instance)
+        return isConnected(AppConfig.getApplication())
     }
 
     /**
@@ -219,10 +219,10 @@ object NetWorkUtil {
                 when (info.subtype) {
 
                     NETWORK_TYPE_GSM, TelephonyManager.NETWORK_TYPE_GPRS, TelephonyManager.NETWORK_TYPE_CDMA, TelephonyManager.NETWORK_TYPE_EDGE, TelephonyManager.NETWORK_TYPE_1xRTT, TelephonyManager.NETWORK_TYPE_IDEN -> netType =
-                            NETWORK_2G
+                        NETWORK_2G
 
                     NETWORK_TYPE_TD_SCDMA, TelephonyManager.NETWORK_TYPE_EVDO_A, TelephonyManager.NETWORK_TYPE_UMTS, TelephonyManager.NETWORK_TYPE_EVDO_0, TelephonyManager.NETWORK_TYPE_HSDPA, TelephonyManager.NETWORK_TYPE_HSUPA, TelephonyManager.NETWORK_TYPE_HSPA, TelephonyManager.NETWORK_TYPE_EVDO_B, TelephonyManager.NETWORK_TYPE_EHRPD, TelephonyManager.NETWORK_TYPE_HSPAP -> netType =
-                            NETWORK_3G
+                        NETWORK_3G
 
                     NETWORK_TYPE_IWLAN, TelephonyManager.NETWORK_TYPE_LTE -> netType = NETWORK_4G
                     else -> {

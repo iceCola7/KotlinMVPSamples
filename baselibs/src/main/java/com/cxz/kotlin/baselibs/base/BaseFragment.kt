@@ -88,6 +88,5 @@ abstract class BaseFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         if (useEventBus()) EventBus.getDefault().unregister(this)
-        // activity?.let { BaseApp.getRefWatcher(it)?.watch(activity) }
     }
 }

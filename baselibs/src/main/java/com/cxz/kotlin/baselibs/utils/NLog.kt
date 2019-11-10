@@ -1,6 +1,7 @@
 package com.cxz.kotlin.baselibs.utils
 
 import android.util.Log
+import com.cxz.kotlin.baselibs.config.AppConfig
 
 /**
  * @author chenxz
@@ -9,13 +10,7 @@ import android.util.Log
  */
 object NLog {
 
-    private const val TAG = "KotlinMVP"
-
-    private var debug: Boolean = false
-
-    fun openLog() {
-        debug = true
-    }
+    private var debug = AppConfig.debug
 
     fun i(tag: String, content: String) {
         if (debug) {
@@ -24,7 +19,7 @@ object NLog {
     }
 
     fun i(content: String) {
-        i(TAG, content)
+        i(AppConfig.TAG, content)
     }
 
     fun v(tag: String, content: String) {
@@ -34,7 +29,7 @@ object NLog {
     }
 
     fun v(content: String) {
-        v(TAG, content)
+        v(AppConfig.TAG, content)
     }
 
     fun d(tag: String, content: String) {
@@ -44,7 +39,7 @@ object NLog {
     }
 
     fun d(content: String) {
-        d(TAG, content)
+        d(AppConfig.TAG, content)
     }
 
     fun w(tag: String, content: String) {
@@ -54,7 +49,7 @@ object NLog {
     }
 
     fun w(content: String) {
-        w(TAG, content)
+        w(AppConfig.TAG, content)
     }
 
     fun e(tag: String, content: String) {
@@ -64,7 +59,7 @@ object NLog {
     }
 
     fun e(content: String) {
-        e(TAG, content)
+        e(AppConfig.TAG, content)
     }
 
 }
