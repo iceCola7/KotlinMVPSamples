@@ -8,6 +8,8 @@ import android.net.Uri
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.view.View
+import android.widget.Checkable
 import android.widget.TextView
 import com.cxz.kotlin.baselibs.R
 import com.cxz.kotlin.baselibs.config.AppConfig
@@ -40,7 +42,8 @@ fun Context.showToast(content: String) {
 fun Activity.showSnackMsg(msg: String) {
     val snackbar = Snackbar.make(this.window.decorView, msg, Snackbar.LENGTH_SHORT)
     val view = snackbar.view
-    view.findViewById<TextView>(R.id.snackbar_text).setTextColor(ContextCompat.getColor(this, R.color.white))
+    view.findViewById<TextView>(R.id.snackbar_text)
+        .setTextColor(ContextCompat.getColor(this, R.color.white))
     snackbar.show()
 }
 
@@ -48,10 +51,27 @@ fun Fragment.showSnackMsg(msg: String) {
     this.activity ?: return
     val snackbar = Snackbar.make(this.activity!!.window.decorView, msg, Snackbar.LENGTH_SHORT)
     val view = snackbar.view
-    view.findViewById<TextView>(R.id.snackbar_text).setTextColor(ContextCompat.getColor(this.activity!!, R.color.white))
+    view.findViewById<TextView>(R.id.snackbar_text)
+        .setTextColor(ContextCompat.getColor(this.activity!!, R.color.white))
     snackbar.show()
 }
 
 fun Context.openBrowser(url: String) {
     Intent(Intent.ACTION_VIEW, Uri.parse(url)).run { startActivity(this) }
+}
+
+// 扩展点击事件属性(重复点击时长)
+var <T : View> T.lastClickTime: Long
+    set(value) = setTag(1766613352, value)
+    get() = getTag(1766613352) as? Long ?: 0
+
+// 重复点击事件绑定
+inline fun <T : View> T.setSingleClickListener(time: Long = 1000, crossinline block: (T) -> Unit) {
+    setOnClickListener {
+        val currentTimeMillis = System.currentTimeMillis()
+        if (currentTimeMillis - lastClickTime > time || this is Checkable) {
+            lastClickTime = currentTimeMillis
+            block(this)
+        }
+    }
 }

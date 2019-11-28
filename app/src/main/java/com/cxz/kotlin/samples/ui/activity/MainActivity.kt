@@ -5,6 +5,7 @@ import android.text.TextUtils
 import android.view.View
 import com.bumptech.glide.Glide
 import com.cxz.kotlin.baselibs.base.BaseMvpTitleActivity
+import com.cxz.kotlin.baselibs.ext.setSingleClickListener
 import com.cxz.kotlin.samples.R
 import com.cxz.kotlin.samples.bean.Banner
 import com.cxz.kotlin.samples.bean.CollectionArticle
@@ -14,7 +15,8 @@ import com.cxz.kotlin.samples.mvp.presenter.MainPresenter
 import com.cxz.kotlin.samples.utils.DialogUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presenter>(), MainContract.View {
+class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presenter>(),
+        MainContract.View {
 
     private val mDialog by lazy {
         DialogUtil.getWaitDialog(this, "正在加载")
@@ -43,33 +45,33 @@ class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presen
     }
 
     override fun initData() {
-        btn_login.setOnClickListener {
+        btn_login.setSingleClickListener {
             val username = et_username.text.toString()
             val password = et_password.text.toString()
             if (TextUtils.isEmpty(username)) {
                 showDefaultMsg("账号不能为空")
-                return@setOnClickListener
+                return@setSingleClickListener
             }
             if (TextUtils.isEmpty(password)) {
                 showDefaultMsg("密码不能为空")
-                return@setOnClickListener
+                return@setSingleClickListener
             }
             mPresenter?.login(username, password)
         }
-        btn_logout.setOnClickListener {
+        btn_logout.setSingleClickListener {
             mPresenter?.logout()
         }
-        btn_get_banner.setOnClickListener {
+        btn_get_banner.setSingleClickListener {
             tv_result.text = ""
             imageView.visibility = View.VISIBLE
             mPresenter?.getBannerList()
         }
-        btn_collect.setOnClickListener {
+        btn_collect.setSingleClickListener {
             tv_result.text = ""
             imageView.visibility = View.GONE
             mPresenter?.getCollectList(0)
         }
-        btn_permission.setOnClickListener {
+        btn_permission.setSingleClickListener {
             rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE)
                     .subscribe {
                         if (it) {
