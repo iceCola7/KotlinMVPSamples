@@ -1,6 +1,5 @@
 package com.cxz.kotlin.samples.ui.activity
 
-import android.Manifest
 import android.text.TextUtils
 import android.view.View
 import com.bumptech.glide.Glide
@@ -13,10 +12,11 @@ import com.cxz.kotlin.samples.bean.CollectionResponseBody
 import com.cxz.kotlin.samples.mvp.contract.MainContract
 import com.cxz.kotlin.samples.mvp.presenter.MainPresenter
 import com.cxz.kotlin.samples.utils.DialogUtil
+import com.cxz.kotlin.samples.utils.PermissionHelper
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presenter>(),
-        MainContract.View {
+    MainContract.View {
 
     private val mDialog by lazy {
         DialogUtil.getWaitDialog(this, "正在加载")
@@ -72,14 +72,17 @@ class MainActivity : BaseMvpTitleActivity<MainContract.View, MainContract.Presen
             mPresenter?.getCollectList(0)
         }
         btn_permission.setSingleClickListener {
-            rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE)
-                    .subscribe {
-                        if (it) {
-                            showDefaultMsg("已允许")
-                        } else {
-                            showDefaultMsg("未允许")
-                        }
-                    }
+            PermissionHelper.requestCameraPermission(this) {
+                showDefaultMsg("相机权限申请成功")
+            }
+//            rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE)
+//                    .subscribe {
+//                        if (it) {
+//                            showDefaultMsg("已允许")
+//                        } else {
+//                            showDefaultMsg("未允许")
+//                        }
+//                    }
         }
     }
 
