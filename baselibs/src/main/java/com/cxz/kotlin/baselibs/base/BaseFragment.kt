@@ -20,6 +20,7 @@ abstract class BaseFragment : Fragment() {
      * 视图是否加载完毕
      */
     private var isViewPrepare = false
+
     /**
      * 数据是否加载过了
      */
@@ -58,7 +59,11 @@ abstract class BaseFragment : Fragment() {
         RxPermissions(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(attachLayoutRes(), null)
     }
 
@@ -71,7 +76,9 @@ abstract class BaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (useEventBus()) EventBus.getDefault().register(this)
+        if (useEventBus()) {
+            EventBus.getDefault().register(this)
+        }
         isViewPrepare = true
         initView(view)
         initData()
@@ -87,6 +94,8 @@ abstract class BaseFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (useEventBus()) EventBus.getDefault().unregister(this)
+        if (useEventBus()) {
+            EventBus.getDefault().unregister(this)
+        }
     }
 }

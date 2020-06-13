@@ -1,6 +1,5 @@
 package com.cxz.kotlin.baselibs.base
 
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.annotation.ColorInt
 import android.support.annotation.LayoutRes
@@ -77,11 +76,9 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         super.onCreate(savedInstanceState)
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT // 强制竖屏
+        // requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT // 强制竖屏
         setContentView(attachLayoutRes())
-        if (useEventBus()) {
-            EventBus.getDefault().register(this)
-        }
+        if (useEventBus()) EventBus.getDefault().register(this)
         initView()
         initData()
         start()
@@ -109,9 +106,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (useEventBus()) {
-            EventBus.getDefault().unregister(this)
-        }
+        if (useEventBus()) EventBus.getDefault().unregister(this)
         CommonUtil.fixInputMethodManagerLeak(this)
     }
 }
