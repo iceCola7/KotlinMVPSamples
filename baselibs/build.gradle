@@ -65,6 +65,7 @@ dependencies {
     api rootProject.ext.commonLibs
 
     kapt rootProject.ext.otherDeps["arouter-compiler"]
+    kapt rootProject.ext.otherDeps["glide-compiler"]
 
 }
 

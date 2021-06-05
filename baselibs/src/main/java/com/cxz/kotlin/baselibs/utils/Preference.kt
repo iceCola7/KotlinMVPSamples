@@ -79,11 +79,11 @@ class Preference<T>(val name: String, private val default: T) {
     private fun getSharedPreferences(name: String, default: T): T = with(prefs) {
         val res: Any = when (default) {
             is Long -> getLong(name, default)
-            is String -> getString(name, default)
+            is String -> getString(name, default) ?: ""
             is Int -> getInt(name, default)
             is Boolean -> getBoolean(name, default)
             is Float -> getFloat(name, default)
-            else -> deSerialization(getString(name, serialize(default)))
+            else -> deSerialization(getString(name, serialize(default)) ?: "")
         }
         return res as T
     }
