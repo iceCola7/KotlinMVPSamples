@@ -6,9 +6,9 @@ import android.content.Context
 import android.location.LocationManager
 import android.os.Binder
 import android.os.Build
-import android.support.v4.app.AppOpsManagerCompat
-import android.support.v4.app.AppOpsManagerCompat.noteOp
-import android.support.v4.app.FragmentActivity
+import androidx.core.app.AppOpsManagerCompat
+import androidx.core.app.AppOpsManagerCompat.noteOp
+import androidx.fragment.app.FragmentActivity
 import com.cxz.kotlin.samples.widgets.PermissionDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
 

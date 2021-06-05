@@ -1,7 +1,7 @@
 package com.cxz.kotlin.baselibs.base
 
-import android.support.annotation.ColorRes
-import android.support.annotation.StringRes
+import androidx.annotation.ColorRes
+import androidx.annotation.StringRes
 import com.cxz.kotlin.baselibs.R
 import com.cxz.kotlin.baselibs.mvp.IPresenter
 import com.cxz.kotlin.baselibs.mvp.IView

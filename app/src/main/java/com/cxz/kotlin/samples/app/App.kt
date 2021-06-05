@@ -4,7 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
-import android.support.multidex.MultiDex
+import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
 import com.cxz.kotlin.baselibs.config.AppConfig
 import com.cxz.kotlin.baselibs.utils.NLog

@@ -46,8 +46,8 @@ ext {
 
     testDeps = [
             "junit"                    : 'junit:junit:4.12',
-            "runner"                   : 'com.android.support.test:runner:1.0.2',
-            "espresso-core"            : "com.android.support.test.espresso:espresso-core:${dependVersion.espressoSdkVersion}",
+            "runner"                   : 'androidx.test.ext:junit:1.1.1',
+            "espresso-core"            : 'androidx.test.espresso:espresso-core:3.1.0',
             "espresso-contrib"         : "com.android.support.test.espresso:espresso-contrib:${dependVersion.espressoSdkVersion}",
             "espresso-intents"         : "com.android.support.test.espresso:espresso-intents:${dependVersion.espressoSdkVersion}",
             "leakcanary-debug"         : 'com.squareup.leakcanary:leakcanary-android:1.6.1',

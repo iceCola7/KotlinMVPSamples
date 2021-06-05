@@ -31,23 +31,32 @@ android {
         abortOnError false
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+//    kotlinOptions {
+//        jvmTarget = JavaVersion.VERSION_1_8
+//    }
+
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    configurations {
-        all*.exclude group: 'com.android.support', module: 'support-v13'
-    }
-    // testImplementation rootProject.ext.testDeps["junit"]
-    // androidTestImplementation rootProject.ext.testDeps["runner"]
-    // androidTestImplementation rootProject.ext.testDeps["espresso-core"]
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    // leakCanary
-    // debugApi rootProject.ext.testDeps["leakcanary-debug"]
-    // releaseApi rootProject.ext.testDeps["leakcanary-release"]
+    api 'androidx.appcompat:appcompat:1.2.0'
+    api 'com.google.android.material:material:1.2.1'
+    api 'androidx.constraintlayout:constraintlayout:2.0.4'
+    api 'androidx.core:core-ktx:1.3.2'
+    api "androidx.recyclerview:recyclerview:1.2.0"
 
     // Support库
-    api rootProject.ext.supportLibs
+    // api rootProject.ext.supportLibs
     // 网络请求库
     api rootProject.ext.networkLibs
     // RxJava2

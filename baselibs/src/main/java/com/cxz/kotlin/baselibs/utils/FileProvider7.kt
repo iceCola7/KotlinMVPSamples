@@ -24,7 +24,7 @@ object FileProvider7 {
 
 
     fun getUriForFile24(context: Context, file: File): Uri {
-        val fileUri = android.support.v4.content.FileProvider.getUriForFile(
+        val fileUri = androidx.core.content.FileProvider.getUriForFile(
             context,
             context.packageName + ".fileprovider",
             file

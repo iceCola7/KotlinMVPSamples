@@ -1,9 +1,9 @@
 package com.cxz.kotlin.baselibs.base
 
 import android.os.Bundle
-import android.support.annotation.ColorInt
-import android.support.annotation.LayoutRes
-import android.support.v7.app.AppCompatActivity
+import androidx.annotation.ColorInt
+import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.WindowManager
