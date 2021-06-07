@@ -49,9 +49,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation rootProject.ext.androisxLibs
-    // Support库
-    // api rootProject.ext.supportLibs
+    api rootProject.ext.androisxLibs
     // 网络请求库
     api rootProject.ext.networkLibs
     // RxJava2
