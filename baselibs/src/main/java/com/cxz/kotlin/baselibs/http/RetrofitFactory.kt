@@ -9,8 +9,8 @@ import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -45,12 +45,12 @@ abstract class RetrofitFactory<T> {
             synchronized(RetrofitFactory::class.java) {
                 if (retrofit == null) {
                     retrofit = Retrofit.Builder()
-                            .baseUrl(mBaseUrl)  // baseUrl
-                            .client(attachOkHttpClient())
-                            //.addConverterFactory(GsonConverterFactory.create())
-                            .addConverterFactory(MoshiConverterFactory.create())
-                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                            .build()
+                        .baseUrl(mBaseUrl)  // baseUrl
+                        .client(attachOkHttpClient())
+                        .addConverterFactory(GsonConverterFactory.create())
+                        //.addConverterFactory(MoshiConverterFactory.create())
+                        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                        .build()
                 }
             }
         }

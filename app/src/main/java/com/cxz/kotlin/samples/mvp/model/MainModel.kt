@@ -7,7 +7,7 @@ import com.cxz.kotlin.samples.bean.CollectionResponseBody
 import com.cxz.kotlin.samples.bean.HttpResult
 import com.cxz.kotlin.samples.http.MainRetrofit
 import com.cxz.kotlin.samples.mvp.contract.MainContract
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 /**
  * @author admin

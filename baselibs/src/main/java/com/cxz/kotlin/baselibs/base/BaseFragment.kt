@@ -1,12 +1,12 @@
 package com.cxz.kotlin.baselibs.base
 
 import android.os.Bundle
-import androidx.annotation.LayoutRes
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.tbruyelle.rxpermissions2.RxPermissions
+import androidx.annotation.LayoutRes
+import androidx.fragment.app.Fragment
+import com.tbruyelle.rxpermissions3.RxPermissions
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -14,7 +14,7 @@ import org.greenrobot.eventbus.EventBus
  * @date 2018/11/19
  * @desc BaseFragment
  */
-abstract class BaseFragment : androidx.fragment.app.Fragment() {
+abstract class BaseFragment : Fragment() {
 
     /**
      * 视图是否加载完毕

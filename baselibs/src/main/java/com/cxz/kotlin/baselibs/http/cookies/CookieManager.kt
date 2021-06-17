@@ -11,17 +11,15 @@ class CookieManager : CookieJar {
 
     private val COOKIE_STORE = PersistentCookieStore()
 
-    override fun saveFromResponse(url: HttpUrl?, cookies: MutableList<Cookie>?) {
-        cookies ?: return
-        url ?: return
-        if (cookies.size > 0) {
+    override fun loadForRequest(url: HttpUrl): List<Cookie> = COOKIE_STORE.get(url)
+
+    override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
+        if (cookies.isNotEmpty()) {
             for (cookie in cookies) {
                 COOKIE_STORE.add(url, cookie)
             }
         }
     }
-
-    override fun loadForRequest(url: HttpUrl): List<Cookie> = COOKIE_STORE.get(url)
 
     /**
      * 清除所有cookie

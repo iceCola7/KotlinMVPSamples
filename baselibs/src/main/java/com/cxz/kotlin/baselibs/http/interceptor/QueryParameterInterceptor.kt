@@ -14,7 +14,7 @@ class QueryParameterInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val request: Request
-        val modifiedUrl = originalRequest.url().newBuilder()
+        val modifiedUrl = originalRequest.url.newBuilder()
                 // Provide your custom parameter here
                 .addQueryParameter("phoneSystem", "")
                 .addQueryParameter("phoneModel", "")

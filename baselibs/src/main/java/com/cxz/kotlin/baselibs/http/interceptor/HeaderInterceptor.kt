@@ -26,8 +26,8 @@ class HeaderInterceptor : Interceptor {
         // .header("token", token)
         // .method(request.method(), request.body())
 
-        val domain = request.url().host()
-        val url = request.url().toString()
+        val domain = request.url.host
+        val url = request.url.toString()
         if (domain.isNotEmpty()) {
             val spDomain: String by Preference(domain, "")
             val cookie: String = if (spDomain.isNotEmpty()) spDomain else ""

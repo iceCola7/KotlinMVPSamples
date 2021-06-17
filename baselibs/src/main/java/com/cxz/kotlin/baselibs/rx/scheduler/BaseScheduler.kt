@@ -1,6 +1,6 @@
 package com.cxz.kotlin.baselibs.rx.scheduler
 
-import io.reactivex.*
+import io.reactivex.rxjava3.core.*
 import org.reactivestreams.Publisher
 
 /**

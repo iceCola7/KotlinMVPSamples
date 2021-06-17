@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.cxz.kotlin.baselibs.utils.CommonUtil
 import com.cxz.kotlin.baselibs.utils.KeyBoardUtil
 import com.cxz.kotlin.baselibs.utils.StatusBarUtil
-import com.tbruyelle.rxpermissions2.RxPermissions
+import com.tbruyelle.rxpermissions3.RxPermissions
 import org.greenrobot.eventbus.EventBus
 
 /**

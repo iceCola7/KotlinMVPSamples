@@ -30,15 +30,15 @@ class OkHttpCookies : Serializable {
 
     @Throws(IOException::class)
     private fun writeObject(out: ObjectOutputStream) {
-        out.writeObject(cookies.name())
-        out.writeObject(cookies.value())
-        out.writeLong(cookies.expiresAt())
-        out.writeObject(cookies.domain())
-        out.writeObject(cookies.path())
-        out.writeBoolean(cookies.secure())
-        out.writeBoolean(cookies.httpOnly())
-        out.writeBoolean(cookies.hostOnly())
-        out.writeBoolean(cookies.persistent())
+        out.writeObject(cookies.name)
+        out.writeObject(cookies.value)
+        out.writeLong(cookies.expiresAt)
+        out.writeObject(cookies.domain)
+        out.writeObject(cookies.path)
+        out.writeBoolean(cookies.secure)
+        out.writeBoolean(cookies.httpOnly)
+        out.writeBoolean(cookies.hostOnly)
+        out.writeBoolean(cookies.persistent)
     }
 
     @Throws(IOException::class, ClassNotFoundException::class)

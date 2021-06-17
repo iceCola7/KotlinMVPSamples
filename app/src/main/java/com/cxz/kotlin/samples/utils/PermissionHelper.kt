@@ -10,7 +10,7 @@ import androidx.core.app.AppOpsManagerCompat
 import androidx.core.app.AppOpsManagerCompat.noteOp
 import androidx.fragment.app.FragmentActivity
 import com.cxz.kotlin.samples.widgets.PermissionDialog
-import com.tbruyelle.rxpermissions2.RxPermissions
+import com.tbruyelle.rxpermissions3.RxPermissions
 
 /**
  * @author admin
@@ -22,34 +22,41 @@ object PermissionHelper {
     /**
      * 申请相机权限
      */
-    fun requestCameraPermission(activity: FragmentActivity?, requestSuccess: (() -> Unit)? = null) {
-        activity?.let {
-            RxPermissions(activity)
-                .requestEachCombined(Manifest.permission.CAMERA)
-                .subscribe {
-                    if (it.granted) {
-                        requestSuccess?.invoke()
-                    } else if (it.shouldShowRequestPermissionRationale) {
-                        showPermissionDialog(
-                            activity, "为了保证您正常使用此功能，需要获取您的相机使用权限，请允许。",
-                            "去允许", true, requestSuccess
-                        )
-                    } else {
-                        showPermissionDialog(
-                            activity, "未取得您的相机使用权限，此功能无法使用。请前往应用权限设置打开权限。",
-                            "去打开", false, requestSuccess
-                        )
-                    }
+    fun requestCameraPermission(activity: FragmentActivity, requestSuccess: (() -> Unit)? = null) {
+        RxPermissions(activity)
+            .requestEachCombined(Manifest.permission.CAMERA)
+            .subscribe {
+                if (it.granted) {
+                    requestSuccess?.invoke()
+                } else if (it.shouldShowRequestPermissionRationale) {
+                    showPermissionDialog(
+                        activity,
+                        "为了保证您正常使用此功能，需要获取您的相机使用权限，请允许。",
+                        "去允许",
+                        true,
+                        requestSuccess
+                    )
+                } else {
+                    showPermissionDialog(
+                        activity,
+                        "未取得您的相机使用权限，此功能无法使用。请前往应用权限设置打开权限。",
+                        "去打开",
+                        false,
+                        requestSuccess
+                    )
                 }
-        }
+            }
     }
 
     /**
      * 展示申请相机权限的对话框
      */
     private fun showPermissionDialog(
-        activity: FragmentActivity, content: String, rightText: String,
-        showPermission: Boolean = true, requestSuccess: (() -> Unit)? = null
+        activity: FragmentActivity,
+        content: String,
+        rightText: String,
+        showPermission: Boolean = true,
+        requestSuccess: (() -> Unit)? = null
     ) {
         PermissionDialog.newBuilder()
             .setTitle("温馨提示")

@@ -8,9 +8,9 @@ import com.cxz.kotlin.baselibs.mvp.IModel
 import com.cxz.kotlin.baselibs.mvp.IView
 import com.cxz.kotlin.baselibs.rx.SchedulerUtils
 import com.cxz.kotlin.baselibs.utils.NetWorkUtil
-import io.reactivex.Observable
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.disposables.Disposable
 
 /**
  * @author chenxz

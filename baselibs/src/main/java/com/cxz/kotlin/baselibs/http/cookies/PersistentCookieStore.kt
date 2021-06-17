@@ -45,25 +45,25 @@ class PersistentCookieStore {
 
     }
 
-    private fun getCookieToken(cookie: Cookie): String = cookie.name() + "@" + cookie.domain()
+    private fun getCookieToken(cookie: Cookie): String = cookie.name + "@" + cookie.domain
 
     fun add(url: HttpUrl, cookie: Cookie) {
         val name = getCookieToken(cookie)
         //将cookies缓存到内存中 如果缓存过期 就重置此cookie
-        if (!cookie.persistent()) {
-            if (!cookies.containsKey(url.host())) {
-                cookies.put(url.host(), ConcurrentHashMap(10))
+        if (!cookie.persistent) {
+            if (!cookies.containsKey(url.host)) {
+                cookies[url.host] = ConcurrentHashMap(10)
             }
-            cookies[url.host()]?.put(name, cookie)
+            cookies[url.host]?.put(name, cookie)
         } else {
-            if (cookies.containsKey(url.host())) {
-                cookies[url.host()]?.remove(name)
+            if (cookies.containsKey(url.host)) {
+                cookies[url.host]?.remove(name)
             }
         }
         // 将Cookie持久化到本地
         val prefsWriter: SharedPreferences.Editor = cookiePrefs.edit()
-        cookies[url.host()]?.entries?.let {
-            prefsWriter.putString(url.host(), TextUtils.join(",", it))
+        cookies[url.host]?.entries?.let {
+            prefsWriter.putString(url.host, TextUtils.join(",", it))
         }
         prefsWriter.putString(name, encodeCookie(OkHttpCookies(cookie)))
         prefsWriter.apply()
@@ -71,8 +71,8 @@ class PersistentCookieStore {
 
     fun get(url: HttpUrl): List<Cookie> {
         val list: ArrayList<Cookie> = ArrayList()
-        if (cookies.containsKey(url.host())) {
-            list.addAll(cookies[url.host()]?.values!!)
+        if (cookies.containsKey(url.host)) {
+            list.addAll(cookies[url.host]?.values!!)
         }
         return list
     }
@@ -88,15 +88,15 @@ class PersistentCookieStore {
 
     fun remove(url: HttpUrl, cookie: Cookie): Boolean {
         val name = getCookieToken(cookie)
-        return if (cookies.containsKey(url.host()) && cookies[url.host()]?.containsKey(name)!!) {
-            cookies[url.host()]?.remove(name)
+        return if (cookies.containsKey(url.host) && cookies[url.host]?.containsKey(name)!!) {
+            cookies[url.host]?.remove(name)
 
             val prefsWriter = cookiePrefs.edit()
             if (cookiePrefs.contains(name)) {
                 prefsWriter.remove(name)
             }
-            cookies[url.host()]?.keys?.let {
-                prefsWriter.putString(url.host(), TextUtils.join(",", it))
+            cookies[url.host]?.keys?.let {
+                prefsWriter.putString(url.host, TextUtils.join(",", it))
             }
             prefsWriter.apply()
 

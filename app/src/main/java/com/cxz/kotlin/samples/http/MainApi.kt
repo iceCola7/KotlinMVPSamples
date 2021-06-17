@@ -4,9 +4,8 @@ import com.cxz.kotlin.samples.bean.Banner
 import com.cxz.kotlin.samples.bean.CollectionArticle
 import com.cxz.kotlin.samples.bean.CollectionResponseBody
 import com.cxz.kotlin.samples.bean.HttpResult
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
-
 
 interface MainApi {
 

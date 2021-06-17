@@ -31,7 +31,7 @@ fun dp2px(dpValue: Float): Int {
     return (0.5f + dpValue * Resources.getSystem().displayMetrics.density).toInt()
 }
 
-fun androidx.fragment.app.Fragment.showToast(content: String) {
+fun Fragment.showToast(content: String) {
     CustomToast(this.activity?.applicationContext, content).show()
 }
 
@@ -47,12 +47,12 @@ fun Activity.showSnackMsg(msg: String) {
     snackbar.show()
 }
 
-fun androidx.fragment.app.Fragment.showSnackMsg(msg: String) {
+fun Fragment.showSnackMsg(msg: String) {
     this.activity ?: return
-    val snackbar = com.google.android.material.snackbar.Snackbar.make(this.activity!!.window.decorView, msg, com.google.android.material.snackbar.Snackbar.LENGTH_SHORT)
+    val snackbar = Snackbar.make(this.requireActivity().window.decorView, msg, Snackbar.LENGTH_SHORT)
     val view = snackbar.view
     view.findViewById<TextView>(R.id.snackbar_text)
-        .setTextColor(ContextCompat.getColor(this.activity!!, R.color.white))
+        .setTextColor(ContextCompat.getColor(this.requireActivity(), R.color.white))
     snackbar.show()
 }
 

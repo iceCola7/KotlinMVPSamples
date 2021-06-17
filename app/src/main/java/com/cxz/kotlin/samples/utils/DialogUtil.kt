@@ -3,9 +3,9 @@ package com.cxz.kotlin.samples.utils
 import android.annotation.SuppressLint
 import android.content.Context
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 /**

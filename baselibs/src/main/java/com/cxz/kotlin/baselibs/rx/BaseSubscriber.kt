@@ -5,7 +5,7 @@ import com.cxz.kotlin.baselibs.http.HttpStatus
 import com.cxz.kotlin.baselibs.http.exception.ExceptionHandle
 import com.cxz.kotlin.baselibs.mvp.IView
 import com.cxz.kotlin.baselibs.utils.NetWorkUtil
-import io.reactivex.subscribers.ResourceSubscriber
+import io.reactivex.rxjava3.subscribers.ResourceSubscriber
 
 /**
  * Created by chenxz on 2018/6/11.

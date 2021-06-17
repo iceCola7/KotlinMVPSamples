@@ -2,6 +2,7 @@ package com.cxz.kotlin.samples.bean
 
 import com.cxz.kotlin.baselibs.bean.BaseBean
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 /**
  * @author admin
