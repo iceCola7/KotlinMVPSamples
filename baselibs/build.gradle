@@ -13,8 +13,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 4
+        versionName "1.0.3"
 
         multiDexEnabled true
 
@@ -22,6 +22,11 @@ android {
 
     buildTypes {
         release {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -60,6 +65,15 @@ dependencies {
     kapt rootProject.ext.annotationProcessorLibs
 
 }
+
+// mavenCentral
+ext {
+    PUBLISH_GROUP_ID = "io.github.iceCola7"  // 项目包名
+    PUBLISH_ARTIFACT_ID = 'kotlin-mvp'       // 项目名
+    PUBLISH_VERSION = '1.0.3'                // 版本号
+}
+apply from: "${rootProject.projectDir}/publish-mavencentral.gradle"
+
 
 //apply plugin: 'com.novoda.bintray-release'
 //publish {
